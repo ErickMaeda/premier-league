@@ -5,8 +5,21 @@ import {
     Table,
     Card
 } from 'react-bootstrap';
+import {
+    connect
+} from 'react-redux';
+import {
+    fetch as fetchMatches
+} from '../actions/matchesAction';
+import {
+    fetch as fetchTeams
+} from '../actions/teamsAction';
 
 class Ranking extends Component {
+    
+    componentDidMount() {
+        this.props.fetchTeams().then(this.props.fetchMatches);
+    }
 
     renderRankingTable = () => {
         return (
@@ -48,8 +61,12 @@ class Ranking extends Component {
     renderWeekGames = () => {
         return (
             <Card>
-                <Card.Header>Week #1</Card.Header>
-                <Card.Body></Card.Body>
+                <Card.Header>
+                    Week #1
+                </Card.Header>
+                <Card.Body>
+
+                </Card.Body>
             </Card>
         );
     }
@@ -78,5 +95,11 @@ const styles = {
         marginRight: 20
     }
 };
-  
-export default Ranking;
+
+const mapStateToProps = (state) => {
+    return {
+
+    };
+}
+
+export default connect(mapStateToProps, { fetchMatches, fetchTeams })(Ranking);
