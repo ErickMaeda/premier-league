@@ -66,7 +66,7 @@ const styles = {
     }
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: Array): Object => {
     return {
         ranking: matchesByTeam(state)
     };

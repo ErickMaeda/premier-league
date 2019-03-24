@@ -24,12 +24,6 @@ class Ranking extends Component {
         this.props.fetchTeams().then(this.props.fetchMatches);
     }
 
-    renderRankingTable = () => {        
-        return (
-            <RankingTable />
-        );
-    }
-
     renderWeekGames = () => {
         return (
             <Card>
@@ -48,7 +42,7 @@ class Ranking extends Component {
             <div style={styles.container}>
                 <div className="row">
                     <div className="col-md-9">
-                        {this.renderRankingTable()}
+                        <RankingTable />
                     </div>
                     <div className="col-md-3">
                         {this.renderWeekGames()}
@@ -66,10 +60,6 @@ const styles = {
         marginLeft: 40,
         marginRight: 40,
         marginBottom: 20
-    },
-    logo: {
-        height: 22,
-        width: 22
     }
 };
 
