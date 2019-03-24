@@ -14,16 +14,20 @@ import {
 import {
     teamLogo
 } from '../selectors/teamsSelector';
+import {
+    data as weekSelected
+} from '../selectors/weekSelectedSelector';
+import {
+    select as selectWeek,
+    selectPreviousWeek,
+    selectNextWeek
+} from '../actions/weekSelectedAction';
 
 class WeekGames extends React.PureComponent {
     
-    onClickNavigateBack = () => {
-
-    };
+    onClickNavigateBack = () => this.props.selectPreviousWeek();
     
-    onClickNavigateNext = () => {
-        
-    };
+    onClickNavigateNext = () => this.props.selectNextWeek();
 
     renderResults = (game, index) => {        
         const {
@@ -74,7 +78,7 @@ class WeekGames extends React.PureComponent {
             <Card>
                 <Card.Header>
                     <div className="container">
-                        Week <strong>#1</strong>
+                        Week <strong>#{this.props.week}</strong>
                         <span className="float-right">
                             <Button 
                                 variant="outline-dark" 
@@ -112,10 +116,13 @@ const styles = {
 };
 
 const mapStateToProps = (state: Array) => {
+    const week = weekSelected(state);
+
     return {
-        weekGame: gamesOfTheWeek(state, 1),
-        state 
+        weekGame: gamesOfTheWeek(state, week),
+        week,
+        state
     };
 }
 
-export default connect(mapStateToProps)(WeekGames);
+export default connect(mapStateToProps, {selectWeek, selectPreviousWeek, selectNextWeek})(WeekGames);
