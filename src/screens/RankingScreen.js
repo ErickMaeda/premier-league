@@ -24,7 +24,7 @@ class Ranking extends Component {
         this.props.fetchTeams().then(this.props.fetchMatches);
     }
 
-    renderRankingTable = () => {
+    renderRankingTable = () => {        
         return (
             <Card>
                 <Table responsive>
@@ -43,18 +43,24 @@ class Ranking extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                        </tr>
+                        {
+                            this.props.ranking.map((team, index) => {
+                                return (
+                                    <tr>
+                                        <td>{index + 1}</td>
+                                        <td><img style={styles.logo} src={team.logo}/> {team.name}</td>
+                                        <td>{team.matches.length}</td>
+                                        <td>{team.wins}</td>
+                                        <td>{team.drawns}</td>
+                                        <td>{team.losses}</td>
+                                        <td>{team.goalsFor}</td>
+                                        <td>{team.goalsAgainst}</td>
+                                        <td>{team.goalsDifference}</td>
+                                        <td>{team.points}</td>
+                                    </tr>
+                                );
+                            })
+                        }                        
                     </tbody>
                 </Table>
             </Card>
@@ -94,8 +100,12 @@ const styles = {
     container: {
         backgroundColor: '#fff',
         marginTop: 20,
-        marginLeft: 20,
-        marginRight: 20
+        marginLeft: 40,
+        marginRight: 40
+    },
+    logo: {
+        height: 22,
+        width: 22
     }
 };
 

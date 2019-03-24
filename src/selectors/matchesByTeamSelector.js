@@ -1,1 +1,1 @@
-export const data = (state) => state.matches || [];
+export const data = (state) => state.matchesByTeam || [];
