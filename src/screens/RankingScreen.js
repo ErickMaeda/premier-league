@@ -14,6 +14,9 @@ import {
 import {
     fetch as fetchTeams
 } from '../actions/teamsAction';
+import {
+    data as matchesByTeam
+} from '../selectors/matchesByTeamSelector';
 
 class Ranking extends Component {
     
@@ -98,7 +101,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
     return {
-
+        ranking: matchesByTeam(state)
     };
 }
 

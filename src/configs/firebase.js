@@ -1,11 +1,15 @@
-import * as firebase from "firebase";
+import {
+    firestore,
+    database,
+    initializeApp
+} from "firebase";
 
 import {
     config    
 } from "../keys/keys";
 
 // Initialize the firebase application
-firebase.initializeApp(config);
+initializeApp(config);
 
 /**
  * @description
@@ -21,9 +25,9 @@ const DATABASE_PROVIDER_FIRESTORE = 'firestore';
 export const getDatabase = (provider) => {
     switch (provider) {
         case DATABASE_PROVIDER_FIRESTORE:
-            return firebase.firestore();
+            return firestore();
         case DATABASE_PROVIDER_REALTIMEDATABASE:
-            return firebase.database();
+            return database();
         default:
             throw new Error('No provider found!');
     }
