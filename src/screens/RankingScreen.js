@@ -2,7 +2,6 @@ import React, {
     Component
 } from 'react';
 import {
-    Table,
     Card
 } from 'react-bootstrap';
 import {
@@ -17,6 +16,7 @@ import {
 import {
     data as matchesByTeam
 } from '../selectors/matchesByTeamSelector';
+import RankingTable from '../components/RankingTable';
 
 class Ranking extends Component {
     
@@ -26,44 +26,7 @@ class Ranking extends Component {
 
     renderRankingTable = () => {        
         return (
-            <Card>
-                <Table responsive>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Club</th>
-                            <th>Played</th>
-                            <th>W</th>
-                            <th>D</th>
-                            <th>L</th>
-                            <th>GF</th>
-                            <th>GA</th>
-                            <th>GD</th>
-                            <th>Pts</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.props.ranking.map((team, index) => {
-                                return (
-                                    <tr>
-                                        <td>{index + 1}</td>
-                                        <td><img style={styles.logo} src={team.logo}/> {team.name}</td>
-                                        <td>{team.matches.length}</td>
-                                        <td>{team.wins}</td>
-                                        <td>{team.drawns}</td>
-                                        <td>{team.losses}</td>
-                                        <td>{team.goalsFor}</td>
-                                        <td>{team.goalsAgainst}</td>
-                                        <td>{team.goalsDifference}</td>
-                                        <td>{team.points}</td>
-                                    </tr>
-                                );
-                            })
-                        }                        
-                    </tbody>
-                </Table>
-            </Card>
+            <RankingTable />
         );
     }
 
@@ -101,7 +64,8 @@ const styles = {
         backgroundColor: '#fff',
         marginTop: 20,
         marginLeft: 40,
-        marginRight: 40
+        marginRight: 40,
+        marginBottom: 20
     },
     logo: {
         height: 22,
