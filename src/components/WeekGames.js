@@ -45,7 +45,7 @@ class WeekGames extends React.PureComponent {
                             {homeTeamBold ? (<strong>{homeTeam}</strong>) : (homeTeam)}
                         </span>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4" className="text-center">
                         <img 
                             style={styles.logo} 
                             src={teamLogo(this.props.state, homeTeam)}
@@ -59,7 +59,7 @@ class WeekGames extends React.PureComponent {
                         />
                     </div>
                     <div className="col-md-4">
-                        <span style={{textAlign: 'left', fontSize: 13}}>
+                        <span style={{textAlign: 'left', fontSize: 13}} className="float-left">
                             {awayTeamBold ? (<strong>{awayTeam}</strong>) : (awayTeam)}
                         </span>
                     </div>
