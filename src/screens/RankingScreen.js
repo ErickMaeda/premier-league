@@ -15,26 +15,14 @@ import {
 } from '../actions/teamsAction';
 import {
     data as matchesByTeam
-} from '../selectors/matchesByTeamSelector';
+} from '../selectors/rankingSelector';
 import RankingTable from '../components/RankingTable';
+import WeekGames from '../components/WeekGames';
 
 class Ranking extends Component {
     
     componentDidMount() {
         this.props.fetchTeams().then(this.props.fetchMatches);
-    }
-
-    renderWeekGames = () => {
-        return (
-            <Card>
-                <Card.Header>
-                    Week #1
-                </Card.Header>
-                <Card.Body>
-
-                </Card.Body>
-            </Card>
-        );
     }
 
     render() {
@@ -45,7 +33,7 @@ class Ranking extends Component {
                         <RankingTable />
                     </div>
                     <div className="col-md-3">
-                        {this.renderWeekGames()}
+                        <WeekGames />
                     </div>
                 </div>
             </div>

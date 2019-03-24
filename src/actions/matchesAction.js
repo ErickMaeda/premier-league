@@ -3,7 +3,7 @@ import {
 } from "../configs/firebase";
 import {
   FETCH_MATCHES, 
-  FETCH_MATCHES_BY_TEAM
+  FETCH_RANKING
 } from "./types";
 import {
   data as getTeams
@@ -31,7 +31,7 @@ export const fetch = () => (dispatch, getState) => {
       .then((matchesByTeam) => computeRanking(matchesByTeam))
       .then((matchesByTeam) => {
         dispatch({
-          type: FETCH_MATCHES_BY_TEAM,
+          type: FETCH_RANKING,
           payload: matchesByTeam
         });
       })

@@ -7,8 +7,8 @@ import {
     connect
 } from 'react-redux';
 import {
-    data as matchesByTeam
-} from '../selectors/matchesByTeamSelector';
+    data as ranking
+} from '../selectors/rankingSelector';
 import {
     getColorByPosition
 } from '../helpers/RankingHelper';
@@ -68,7 +68,7 @@ const styles = {
 
 const mapStateToProps = (state: Array): Object => {
     return {
-        ranking: matchesByTeam(state)
+        ranking: ranking(state)
     };
 }
 
