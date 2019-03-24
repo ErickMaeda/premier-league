@@ -44,8 +44,6 @@ const computeRanking = (teams) => new Promise((resolve, reject) => {
     return team;
   })
     .sort((a, b) => {
-      console.log(a, b);
-      // return b.points - a.points;
       if (a.points < b.points) {
         return 1;
       } else if (a.points === b.points) {
