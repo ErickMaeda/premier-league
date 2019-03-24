@@ -30,6 +30,7 @@ $jsonData = json_decode($json);
 echo "\n\n";
 echo "> Dividing JSON into pieces of 10";
 echo "\n\n";
+
 // Divide array in piece of 10
 $jsonData = array_chunk($jsonData, 10);
 
@@ -42,4 +43,5 @@ $dataFinal = [
 echo "\n\n";
 echo "> Finishing writing data";
 echo "\n\n";
+
 file_put_contents($responsePath, json_encode($dataFinal));
