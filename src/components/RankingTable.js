@@ -37,7 +37,7 @@ class RankingTable extends React.PureComponent {
                         {
                             this.props.ranking.map((team, index) => {
                                 return (
-                                    <tr style={{backgroundColor: getColorByPosition(index + 1)}}>
+                                    <tr key={index} style={{backgroundColor: getColorByPosition(index + 1)}}>
                                         <td><span>{index + 1}</span></td>
                                         <td><img style={styles.logo} src={team.logo}/> {team.name}</td>
                                         <td>{team.matches.length}</td>

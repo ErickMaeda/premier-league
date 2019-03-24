@@ -24,9 +24,10 @@ export const fetch = () => (dispatch, getState) => {
       payload: snapshot.val()
     });
 
-    const matches = snapshot.val();
+    const matchWeeks = snapshot.val();
     const teams = getTeams(getState());
-    groupTeamsByMatches(teams, matches)
+
+    groupTeamsByMatches(teams, matchWeeks)
       .then((matchesByTeam) => computeMatches(matchesByTeam))
       .then((matchesByTeam) => computeRanking(matchesByTeam))
       .then((matchesByTeam) => {
@@ -88,32 +89,32 @@ const computeMatches = (teams) => new Promise((resolve, reject) => {
     drawns = 0;
     losses = 0;
     
-    team.matches.forEach((match) => {      
-
-
-      if (match.HomeTeam === team.name) {
-        if (match.FTHG > match.FTAG) {
-          wins++;
-        } else if (match.FTHG === match.FTAG) {
-          drawns++;
-        } else {
-          losses++
+    team.matches.forEach((matchWeeks) => {      
+      matchWeeks.forEach((match) => {
+        if (match.HomeTeam === team.name) {
+          if (match.FTHG > match.FTAG) {
+            wins++;
+          } else if (match.FTHG === match.FTAG) {
+            drawns++;
+          } else {
+            losses++;
+          }
+          team.goalsFor += parseInt(match.FTHG);
+          team.goalsAgainst += parseInt(match.FTAG);
+          team.goalsDifference += parseInt(match.FTHG - match.FTAG);
+        } else if (match.AwayTeam === team.name) {
+          if (match.FTAG > match.FTHG) {
+            wins++;
+          } else if (match.FTHG === match.FTAG) {
+            drawns++;
+          } else {
+            losses++;
+          }
+          team.goalsFor += parseInt(match.FTAG);
+          team.goalsAgainst += parseInt(match.FTHG);
+          team.goalsDifference += parseInt(match.FTAG - match.FTHG);
         }
-        team.goalsFor += parseInt(match.FTHG);
-        team.goalsAgainst += parseInt(match.FTAG);
-        team.goalsDifference += parseInt(match.FTHG - match.FTAG);
-      } else if (match.AwayTeam === team.name) {
-        if (match.FTAG > match.FTHG) {
-          wins++;
-        } else if (match.FTHG === match.FTAG) {
-          drawns++;
-        } else {
-          losses++
-        }
-        team.goalsFor += parseInt(match.FTAG);
-        team.goalsAgainst += parseInt(match.FTHG);
-        team.goalsDifference += parseInt(match.FTAG - match.FTHG);
-      }
+      })
     });
     team.wins = wins;
     team.drawns = drawns;
@@ -129,11 +130,15 @@ const computeMatches = (teams) => new Promise((resolve, reject) => {
  * @param {Array} teams 
  * @param {Array} matches 
  */
-const groupTeamsByMatches = (teams, matches) => new Promise((resolve, reject) => {
+const groupTeamsByMatches = (teams, matchWeeks) => new Promise((resolve, reject) => {
   const matchesByTeam = [];
   teams.forEach((team) => {
+    let matchs = [];
+    matchWeeks.forEach((match) => {
+      matchs.push(match.filter((match) => match.AwayTeam === team.name || match.HomeTeam === team.name))
+    });
     matchesByTeam.push({
-      'matches': matches.filter((match) => match.AwayTeam === team.name || match.HomeTeam === team.name),
+      'matches': matchs,
       'logo': team.logo,
       'name': team.name
     });

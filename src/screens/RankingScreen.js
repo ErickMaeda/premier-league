@@ -29,10 +29,10 @@ class Ranking extends Component {
         return (
             <div style={styles.container}>
                 <div className="row">
-                    <div className="col-md-9">
+                    <div className="col-md-8">
                         <RankingTable />
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-4">
                         <WeekGames />
                     </div>
                 </div>
@@ -44,10 +44,10 @@ class Ranking extends Component {
 const styles = {
     container: {
         backgroundColor: '#fff',
-        marginTop: 20,
-        marginLeft: 40,
-        marginRight: 40,
-        marginBottom: 20
+        marginTop: 30,
+        marginBottom: 30,
+        marginLeft: 60,
+        marginRight: 60
     }
 };
 
