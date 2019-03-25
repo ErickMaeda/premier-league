@@ -109,8 +109,8 @@ const styles = {
         fontSize: 14
     },    
     logo: {
-        height: 25,
-        width: 25,
+        height: 30,
+        width: 30,
         padding: 2
     }
 };
