@@ -52,7 +52,7 @@ class WeekGames extends React.PureComponent {
             <Container key={index}>
                 <Row>
                     <Col xs={3} className="text-right">
-                        {homeTeamBold ? (<strong>{truncate(teamShortName(this.props.state, homeTeam), 8)}</strong>) : (truncate(teamShortName(this.props.state, homeTeam), 8))}
+                        {homeTeamBold ? (<strong style={styles.textWinner}>{teamShortName(this.props.state, homeTeam)}</strong>) : teamShortName(this.props.state, homeTeam)}
                     </Col>
                     <Col xs={6} className="text-center">
                         <img 
@@ -68,7 +68,7 @@ class WeekGames extends React.PureComponent {
                         />
                     </Col>
                     <Col xs={3} className="text-left">
-                        {awayTeamBold ? (<strong>{truncate(teamShortName(this.props.state, awayTeam), 8)}</strong>) : (truncate(teamShortName(this.props.state, awayTeam), 8))}
+                        {awayTeamBold ? (<strong style={styles.textWinner}>{teamShortName(this.props.state, awayTeam)}</strong>) : teamShortName(this.props.state, awayTeam)}
                     </Col>
                 </Row>
                 <hr/>
@@ -105,9 +105,10 @@ class WeekGames extends React.PureComponent {
 };
 
 const styles = {
-    text: {
-        fontSize: 14
-    },    
+    textWinner: {
+        fontSize: 14,
+        color: 'green'
+    },   
     logo: {
         height: 30,
         width: 30,
