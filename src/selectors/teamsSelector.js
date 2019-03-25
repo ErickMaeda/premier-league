@@ -13,3 +13,9 @@ export const team = (state, teamName) => {
 export const teamLogo = (state, teamName) => {
     return team(state, teamName).logo
 };
+
+export const teamShortName = (state, teamName) => {
+    console.log(team(state, teamName));
+    
+    return team(state, teamName).shortName;
+};

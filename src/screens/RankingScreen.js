@@ -2,7 +2,9 @@ import React, {
     Component
 } from 'react';
 import {
-    Card
+    Container,
+    Row,
+    Col
 } from 'react-bootstrap';
 import {
     connect
@@ -27,27 +29,24 @@ class Ranking extends Component {
 
     render() {
         return (
-            <div style={styles.container}>
-                <div className="row">
-                    <div className="col-md-8">
+            <Container>
+                <Row style={styles.container}>
+                    <Col md={12} lg={7}>
                         <RankingTable />
-                    </div>
-                    <div className="col-md-4">
+                    </Col>
+                    <Col md={12} lg={5}>
                         <WeekGames />
-                    </div>
-                </div>
-            </div>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 };
 
 const styles = {
     container: {
-        backgroundColor: '#fff',
-        marginTop: 30,
-        marginBottom: 30,
-        marginLeft: 60,
-        marginRight: 60
+        marginTop: 15,
+        marginBottom: 15
     }
 };
 

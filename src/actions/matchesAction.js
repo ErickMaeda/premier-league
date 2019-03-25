@@ -140,7 +140,8 @@ const groupTeamsByMatches = (teams, matchWeeks) => new Promise((resolve, reject)
     matchesByTeam.push({
       'matches': matchs,
       'logo': team.logo,
-      'name': team.name
+      'name': team.name,
+      'shortName': team.shortName
     });
   });
   resolve(matchesByTeam);

@@ -3,7 +3,10 @@ import React, {
 } from 'react';
 import {
     Card,
-    Button
+    Button,
+    Container,
+    Row,
+    Col
 } from 'react-bootstrap';
 import {
     connect
@@ -12,7 +15,8 @@ import {
     gamesOfTheWeek
 } from '../selectors/matchesSelector';
 import {
-    teamLogo
+    teamLogo,
+    teamShortName
 } from '../selectors/teamsSelector';
 import {
     data as weekSelected
@@ -22,6 +26,9 @@ import {
     selectPreviousWeek,
     selectNextWeek
 } from '../actions/weekSelectedAction';
+import {
+    truncate
+} from '../helpers/Utils';
 
 class WeekGames extends React.PureComponent {
     
@@ -42,64 +49,57 @@ class WeekGames extends React.PureComponent {
         const awayTeamBold = awayTeamGoals > homeTeamGoals;
 
         return (
-            <div key={index}>
-                <div  className="row">
-                    <div className="col-md-4">
-                        <span style={{textAlign: 'right' , fontSize: 13}} className="float-right">
-                            {homeTeamBold ? (<strong>{homeTeam}</strong>) : (homeTeam)}
-                        </span>
-                    </div>
-                    <div className="col-md-4" className="text-center">
+            <Container key={index}>
+                <Row>
+                    <Col xs={3} className="text-right">
+                        {homeTeamBold ? (<strong>{truncate(teamShortName(this.props.state, homeTeam), 8)}</strong>) : (truncate(teamShortName(this.props.state, homeTeam), 8))}
+                    </Col>
+                    <Col xs={6} className="text-center">
                         <img 
                             style={styles.logo} 
                             src={teamLogo(this.props.state, homeTeam)}
                         />
-                        {homeTeamGoals}
-                        <span>  x  </span>
-                        {awayTeamGoals}
+                        &nbsp;
+                        {homeTeamGoals} x {awayTeamGoals}
+                        &nbsp;
                         <img 
                             style={styles.logo} 
                             src={teamLogo(this.props.state, awayTeam)}
                         />
-                    </div>
-                    <div className="col-md-4">
-                        <span style={{textAlign: 'left', fontSize: 13}} className="float-left">
-                            {awayTeamBold ? (<strong>{awayTeam}</strong>) : (awayTeam)}
-                        </span>
-                    </div>
-                </div>
+                    </Col>
+                    <Col xs={3} className="text-left">
+                        {awayTeamBold ? (<strong>{truncate(teamShortName(this.props.state, awayTeam), 8)}</strong>) : (truncate(teamShortName(this.props.state, awayTeam), 8))}
+                    </Col>
+                </Row>
                 <hr/>
-            </div>
+            </Container>
         )
     }
 
     render() {
         return (
-            <Card>
-                <Card.Header>
-                    <div className="container">
-                        Week <strong>#{this.props.week}</strong>
-                        <span className="float-right">
-                            <Button 
-                                variant="outline-dark" 
-                                onClick={this.onClickNavigateBack}
-                            >
-                                {'<'}
-                            </Button> 
-                            &emsp;
-                            <Button 
-                                variant="outline-dark" 
-                                onClick={this.onClickNavigateNext}
-                            >
-                                {'>'} 
-                            </Button>
-                        </span>
-                    </div>
-                </Card.Header>
-                <Card.Body>
+            <Row>
+                <Col className="text-left float-left">
+                    <Button 
+                        variant="light" 
+                        onClick={this.onClickNavigateBack}
+                    >
+                        {'<'}
+                    </Button>
+                </Col>
+                <Col className="text-center" style={{alignSelf: 'center'}}>Week <strong>#{this.props.week}</strong></Col>
+                <Col className="text-right float-right">
+                    <Button 
+                        variant="light" 
+                        onClick={this.onClickNavigateNext}
+                    >
+                        {'>'} 
+                    </Button>
+                </Col>
+                <Row style={{marginTop: 15, marginBottom: 15}}>
                     {this.props.weekGame.map(this.renderResults)}
-                </Card.Body>
-            </Card>
+                </Row>
+            </Row>
         );
     };
 };
@@ -109,9 +109,9 @@ const styles = {
         fontSize: 14
     },    
     logo: {
-        height: 30,
-        width: 30,
-        padding: 5
+        height: 25,
+        width: 25,
+        padding: 2
     }
 };
 
