@@ -1,7 +1,8 @@
 import React from 'react';
 import {
     Table,
-    Card
+    Card,
+    Spinner
 } from 'react-bootstrap';
 import {
     connect
@@ -15,6 +16,30 @@ import {
 
 class RankingTable extends React.PureComponent {
 
+    renderLoading = () => {
+        return (
+            <Spinner animation="grow" />
+        )
+    }
+
+    renderRows = () => {
+        return this.props.ranking.map((team, index) => {
+            return (
+                <tr key={index} style={{backgroundColor: getColorByPosition(index + 1)}}>
+                    <td><span>{index + 1}</span></td>
+                    <td><img style={styles.logo} src={team.logo}/> {team.name}</td>
+                    <td>{(team.wins + team.drawns + team.losses)}</td>
+                    <td>{team.wins}</td>
+                    <td>{team.drawns}</td>
+                    <td>{team.losses}</td>
+                    <td>{team.goalsFor}</td>
+                    <td>{team.goalsAgainst}</td>
+                    <td>{team.goalsDifference}</td>
+                    <td>{team.points}</td>
+                </tr>
+            );
+        })
+    }
     render() {
         return (
             <Card>
@@ -34,24 +59,7 @@ class RankingTable extends React.PureComponent {
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            this.props.ranking.map((team, index) => {
-                                return (
-                                    <tr key={index} style={{backgroundColor: getColorByPosition(index + 1)}}>
-                                        <td><span>{index + 1}</span></td>
-                                        <td><img style={styles.logo} src={team.logo}/> {team.name}</td>
-                                        <td>{(team.wins + team.drawns + team.losses)}</td>
-                                        <td>{team.wins}</td>
-                                        <td>{team.drawns}</td>
-                                        <td>{team.losses}</td>
-                                        <td>{team.goalsFor}</td>
-                                        <td>{team.goalsAgainst}</td>
-                                        <td>{team.goalsDifference}</td>
-                                        <td>{team.points}</td>
-                                    </tr>
-                                );
-                            })
-                        }                        
+                        {this.props.ranking.length > 0 ? this.renderRows() : this.renderLoading()}                       
                     </tbody>
                 </Table>
             </Card>
