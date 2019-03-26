@@ -52,7 +52,7 @@ class WeekGames extends React.PureComponent {
                             src={homeTeam.logo}
                         />
                         &nbsp;
-                        {homeTeamGoals} x {awayTeamGoals}
+                        <span style={styles.textScoreBoard}>{homeTeamGoals} x {awayTeamGoals}</span>
                         &nbsp;
                         <img 
                             style={styles.logo} 
@@ -112,6 +112,12 @@ const styles = {
         height: 30,
         width: 30,
         padding: 2
+    },
+    textScoreBoard: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        paddingLeft: 4,
+        paddingRight: 4
     }
 };
 

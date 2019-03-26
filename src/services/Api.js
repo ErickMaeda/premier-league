@@ -18,9 +18,9 @@ export default class Api {
         this.type = type;
         return this;
     };
-    
+
     getId = () => this.id;
-    
+
     getType = () => this.type;
 
     toString = () => {
@@ -29,17 +29,26 @@ export default class Api {
         }
 
         let url = API + '/' + this.getType();
-        
+
         if (this.getId() != -1) {
             url += '/' + this.getId();
         }
 
         return url;
     };
-    
+
     request = (url = null) => new Promise((resolve, reject) => {
+
+        /** 
+         * Need to create this agent
+         * By default axios accept only HTTPS
+         * */
+        const agent = new https.Agent({
+            rejectUnauthorized: false
+        });
+
         const requestUrl = url || this.toString();
-        axios.get(requestUrl)
+        axios.get(requestUrl, { httpsAgent: agent })
             .then((response) => resolve(response.data))
             .catch(reject);
     });
