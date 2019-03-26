@@ -1,7 +1,7 @@
 import {
-    FETCH_TEAMS_LOADING,
-    FETCH_TEAMS_ERROR,
-    FETCH_TEAMS_SUCCESS
+    FETCH_WEEKS_LOADING,
+    FETCH_WEEKS_ERROR,
+    FETCH_WEEKS_SUCCESS
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -12,19 +12,19 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case FETCH_TEAMS_LOADING:
+        case FETCH_WEEKS_LOADING:
             return {
                 loading: true,
                 error: null,
                 data: []
             };
-        case FETCH_TEAMS_ERROR:
+        case FETCH_WEEKS_ERROR:
             return {
                 loading: false,
                 error: action.payload,
                 data: []
             };
-        case FETCH_TEAMS_SUCCESS:
+        case FETCH_WEEKS_SUCCESS:
             return {
                 loading: false,
                 error: null,

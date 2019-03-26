@@ -1,8 +1,5 @@
-import React, {
-    Component
-} from 'react';
+import React from 'react';
 import {
-    Card,
     Button,
     Container,
     Row,
@@ -12,23 +9,20 @@ import {
     connect
 } from 'react-redux';
 import {
-    gamesOfTheWeek
-} from '../selectors/matchesSelector';
+    getWeek, 
+    getWeeks
+} from '../selectors/weeksSelector';
 import {
-    teamLogo,
-    teamShortName
+    getTeams,
+    getTeam
 } from '../selectors/teamsSelector';
 import {
     data as weekSelected
 } from '../selectors/weekSelectedSelector';
 import {
-    select as selectWeek,
     selectPreviousWeek,
     selectNextWeek
 } from '../actions/weekSelectedAction';
-import {
-    truncate
-} from '../helpers/Utils';
 
 class WeekGames extends React.PureComponent {
     
@@ -36,39 +30,37 @@ class WeekGames extends React.PureComponent {
     
     onClickNavigateNext = () => this.props.selectNextWeek();
 
-    renderResults = (game, index) => {        
-        const {
-            HomeTeam: homeTeam,
-            AwayTeam: awayTeam,
-            FTHG: homeTeamGoals,
-            FTAG: awayTeamGoals,
-            Date: date
-        } = game;
-
+    renderResults = (game, index) => {
+        const homeTeamGoals = game.score[0];
+        const awayTeamGoals = game.score[1];
+        
         const homeTeamBold = homeTeamGoals > awayTeamGoals;
         const awayTeamBold = awayTeamGoals > homeTeamGoals;
+
+        const homeTeam = getTeam(game.teamIds[0]) || {};
+        const awayTeam = getTeam(game.teamIds[1]) || {};
 
         return (
             <Container key={index}>
                 <Row>
                     <Col xs={3} className="text-right">
-                        {homeTeamBold ? (<strong style={styles.textWinner}>{teamShortName(this.props.state, homeTeam)}</strong>) : teamShortName(this.props.state, homeTeam)}
+                        {homeTeamBold ? (<strong style={styles.textWinner}>{homeTeam.shortName}</strong>) : homeTeam.shortName}
                     </Col>
                     <Col xs={6} className="text-center">
                         <img 
                             style={styles.logo} 
-                            src={teamLogo(this.props.state, homeTeam)}
+                            src={homeTeam.logo}
                         />
                         &nbsp;
                         {homeTeamGoals} x {awayTeamGoals}
                         &nbsp;
                         <img 
                             style={styles.logo} 
-                            src={teamLogo(this.props.state, awayTeam)}
+                            src={awayTeam.logo}
                         />
                     </Col>
                     <Col xs={3} className="text-left">
-                        {awayTeamBold ? (<strong style={styles.textWinner}>{teamShortName(this.props.state, awayTeam)}</strong>) : teamShortName(this.props.state, awayTeam)}
+                        {awayTeamBold ? (<strong style={styles.textWinner}>{awayTeam.shortName}</strong>) : awayTeam.shortName}
                     </Col>
                 </Row>
                 <hr/>
@@ -80,21 +72,28 @@ class WeekGames extends React.PureComponent {
         return (
             <Row>
                 <Col className="text-left float-left">
-                    <Button 
-                        variant="light" 
-                        onClick={this.onClickNavigateBack}
-                    >
-                        {'<'}
-                    </Button>
+                    { // Hide back button if already in first week
+                        this.props.week !== 1 &&
+                        <Button 
+                            variant="light" 
+                            onClick={this.onClickNavigateBack}
+                            disabled={this.props.week === 1}
+                        >
+                            {'<'}
+                        </Button>
+                    }
                 </Col>
                 <Col className="text-center" style={{alignSelf: 'center'}}>Week <strong>#{this.props.week}</strong></Col>
                 <Col className="text-right float-right">
-                    <Button 
-                        variant="light" 
-                        onClick={this.onClickNavigateNext}
-                    >
-                        {'>'} 
-                    </Button>
+                    { // Hide next button if already in last week
+                        this.props.week !== (this.props.weeks.length - 1) &&
+                        <Button 
+                            variant="light" 
+                            onClick={this.onClickNavigateNext}
+                        >
+                            {'>'} 
+                        </Button>
+                    }
                 </Col>
                 <Row style={{marginTop: 15, marginBottom: 15}}>
                     {this.props.weekGame.map(this.renderResults)}
@@ -116,14 +115,15 @@ const styles = {
     }
 };
 
-const mapStateToProps = (state: Array) => {
+const mapStateToProps = (state) => {
     const week = weekSelected(state);
 
     return {
-        weekGame: gamesOfTheWeek(state, week),
+        weeks: getWeeks(),
+        weekGame: getWeek(week),
         week,
-        state
+        teams: getTeams()
     };
 }
 
-export default connect(mapStateToProps, {selectWeek, selectPreviousWeek, selectNextWeek})(WeekGames);
+export default connect(mapStateToProps, {selectPreviousWeek, selectNextWeek})(WeekGames);

@@ -7,7 +7,7 @@ import {
     connect
 } from 'react-redux';
 import {
-    data as ranking
+    getRanking
 } from '../selectors/rankingSelector';
 import {
     getColorByPosition
@@ -66,9 +66,9 @@ const styles = {
     }
 };
 
-const mapStateToProps = (state: Array): Object => {
+const mapStateToProps = (state) => {
     return {
-        ranking: ranking(state)
+        ranking: getRanking()
     };
 }
 

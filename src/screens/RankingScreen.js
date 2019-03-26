@@ -10,14 +10,11 @@ import {
     connect
 } from 'react-redux';
 import {
-    fetch as fetchMatches
-} from '../actions/matchesAction';
-import {
     fetch as fetchTeams
 } from '../actions/teamsAction';
 import {
-    data as matchesByTeam
-} from '../selectors/rankingSelector';
+    fetch as fetchWeeks
+} from '../actions/weeksAction';
 import RankingTable from '../components/RankingTable';
 import WeekGames from '../components/WeekGames';
 import LegendBox from '../components/LegendBox';
@@ -25,7 +22,7 @@ import LegendBox from '../components/LegendBox';
 class Ranking extends Component {
     
     componentDidMount() {
-        this.props.fetchTeams().then(this.props.fetchMatches);
+        this.props.fetchTeams().then(this.props.fetchWeeks());
     }
 
     render() {
@@ -59,10 +56,4 @@ const styles = {
     }
 };
 
-const mapStateToProps = (state) => {
-    return {
-        ranking: matchesByTeam(state)
-    };
-}
-
-export default connect(mapStateToProps, { fetchMatches, fetchTeams })(Ranking);
+export default connect(null, { fetchWeeks, fetchTeams })(Ranking);

@@ -1,13 +1,13 @@
 import { combineReducers } from "redux";
 
 import ranking from "./rankingReducer";
-import matches from "./matchesReducer";
+import weeks from "./weeksReducer";
 import teams from "./teamsReducer";
 import weekSelected from "./weekSelectedReducer";
 
 export default combineReducers({
   ranking,
-  matches,
+  weeks,
   teams,
   weekSelected
 });

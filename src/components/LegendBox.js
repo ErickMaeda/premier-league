@@ -26,16 +26,18 @@ class LegendBox extends React.PureComponent {
 
     render() {
         return (
-            <Card>
-                <Card.Header>
-                    Legends
-                </Card.Header>
-                <Card.Body>
-                    <Row>
-                        {this.props.legends.map(this.renderLegend)}
-                    </Row>
-                </Card.Body>
-            </Card>
+            <Container>
+                <Card>
+                    <Card.Header>
+                        Legends
+                    </Card.Header>
+                    <Card.Body>
+                        <Row>
+                            {this.props.legends.map(this.renderLegend)}
+                        </Row>
+                    </Card.Body>
+                </Card>
+            </Container>
         );
     };
 };
@@ -45,7 +47,8 @@ const styles = {
         height: 20,
         width: 20,
         borderRadius: 50
-    }
+    },
+    
 };
 
 const mapStateToProps = (state: Array) => {

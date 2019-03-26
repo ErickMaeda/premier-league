@@ -14,17 +14,20 @@ import TeamScreen from './screens/TeamScreen';
 import WeeksScreen from './screens/WeeksScreen';
 
 // Import Redux
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import reduxThunk from "redux-thunk";
-import reducers from "./reducers";
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reduxThunk from 'redux-thunk';
+import reducers from './reducers';
+import StoreProvider from './configs/store';
 
 // Header component
 import Header from './components/Header';
 
-// Configure the reducer
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
+// Configure the reducer
+const configureStore = () => createStore(reducers, {}, applyMiddleware(reduxThunk));
+StoreProvider.init(configureStore);
+const store = StoreProvider.getStore();
 
 const Routes = (
   <Provider store={store}>
@@ -32,7 +35,7 @@ const Routes = (
       <div>
         <Header />
         <Switch>
-          <Route path="/" exact={true} component={RankingScreen} />
+          <Route path='/' exact={true} component={RankingScreen} />
         </Switch>
       </div>
     </HashRouter>
