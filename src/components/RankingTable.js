@@ -8,7 +8,9 @@ import {
     connect
 } from 'react-redux';
 import {
-    getRanking
+    getRanking,
+    getRankingError, 
+    getRankingProgress
 } from '../selectors/rankingSelector';
 import {
     getColorByPosition
@@ -16,18 +18,40 @@ import {
 
 class RankingTable extends React.PureComponent {
 
-    renderLoading = () => {
+    renderProgress = () => {
         return (
             <Spinner animation="grow" />
-        )
-    }
+        );
+    };
+    
+    renderError = () => {
+        return (
+            <span>{this.props.error}</span>
+        );
+    };
+
+    renderPlaceholder = () => {
+        let component;
+        if (this.props.error) {
+            component = this.renderError();
+        } else {
+            component = this.renderProgress();
+        }
+        return (
+            <tr>
+                <td colSpan="10" className="text-center">
+                    {component}
+                </td>
+            </tr>
+        );
+    };
 
     renderRows = () => {
         return this.props.ranking.map((team, index) => {
             return (
-                <tr key={index} style={{backgroundColor: getColorByPosition(index + 1)}}>
+                <tr key={index} style={{ backgroundColor: getColorByPosition(index + 1) }}>
                     <td><span>{index + 1}</span></td>
-                    <td><img style={styles.logo} src={team.logo}/> {team.name}</td>
+                    <td><img style={styles.logo} src={team.logo} /> {team.name}</td>
                     <td>{(team.wins + team.drawns + team.losses)}</td>
                     <td>{team.wins}</td>
                     <td>{team.drawns}</td>
@@ -38,8 +62,9 @@ class RankingTable extends React.PureComponent {
                     <td>{team.points}</td>
                 </tr>
             );
-        })
-    }
+        });
+    };
+
     render() {
         return (
             <Card>
@@ -59,12 +84,12 @@ class RankingTable extends React.PureComponent {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.ranking.length > 0 ? this.renderRows() : this.renderLoading()}                       
+                        {this.props.ranking.length > 0 ? this.renderRows() : this.renderPlaceholder()}
                     </tbody>
                 </Table>
             </Card>
         );
-    }
+    };
 };
 
 const styles = {
@@ -76,7 +101,9 @@ const styles = {
 
 const mapStateToProps = (state) => {
     return {
-        ranking: getRanking()
+        ranking: getRanking(),
+        error: getRankingError(),
+        progress: getRankingProgress()
     };
 }
 

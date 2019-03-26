@@ -11,6 +11,9 @@ import {
 /**
  * @description
  * - Fetch the teams on Premier League;
+ * - Add team logo for each team;
+ * - Add team shortName for each team;
+ * - Fetch the teams on Premier League;
  * - Dispatch the data to reducer;
  * 
  * @returns Promise
