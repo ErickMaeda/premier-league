@@ -1,4 +1,5 @@
 import axios from 'axios';
+import https from 'https'
 
 const API = "http://acor.sl.pt:7777";
 
