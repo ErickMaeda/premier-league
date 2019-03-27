@@ -18,7 +18,10 @@ class LegendBox extends React.PureComponent {
         return (
             <Row>
                 <Col>
-                    <div style={{...styles.circle, backgroundColor: legend.color}}></div>{legend.description}
+                    <div style={{...styles.circle, backgroundColor: legend.color}}></div>
+                </Col>
+                <Col>
+                    {legend.description}
                 </Col>
             </Row>
         );
@@ -26,29 +29,26 @@ class LegendBox extends React.PureComponent {
 
     render() {
         return (
-            <Container>
-                <Card>
-                    <Card.Header>
-                        Legends
-                    </Card.Header>
-                    <Card.Body>
-                        <Row>
-                            {this.props.legends.map(this.renderLegend)}
-                        </Row>
-                    </Card.Body>
-                </Card>
+            <Container style={styles.container}>
+                <Row>
+                    {this.props.legends.map(this.renderLegend)}
+                </Row>
             </Container>
         );
     };
 };
 
 const styles = {
-    circle: {
-        height: 20,
-        width: 20,
-        borderRadius: 50
+    container: {
+        marginTop: 15,
+        marginBottom: 15
     },
-    
+    circle: {
+        height: 15,
+        width: 15,
+        borderRadius: 50,
+        margin: 10
+    }
 };
 
 const mapStateToProps = (state: Array) => {

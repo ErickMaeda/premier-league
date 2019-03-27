@@ -15,6 +15,9 @@ import {
 import {
     getColorByPosition
 } from '../helpers/RankingHelper';
+import {
+    truncate
+} from '../helpers/Utils';
 
 class RankingTable extends React.PureComponent {
 
@@ -51,7 +54,7 @@ class RankingTable extends React.PureComponent {
             return (
                 <tr key={index} style={{ backgroundColor: getColorByPosition(index + 1) }}>
                     <td><span>{index + 1}</span></td>
-                    <td><img style={styles.logo} src={team.logo} /> {team.name}</td>
+                    <td><img style={styles.logo} src={team.logo} /> {truncate(team.name, 15)}</td>
                     <td>{(team.wins + team.drawns + team.losses)}</td>
                     <td>{team.wins}</td>
                     <td>{team.drawns}</td>

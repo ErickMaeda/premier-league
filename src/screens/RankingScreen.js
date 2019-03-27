@@ -31,14 +31,6 @@ class Ranking extends Component {
                 <Row style={styles.container}>
                     <Col md={12} lg={7}>
                         <RankingTable />
-                        <LegendBox 
-                            legends={[
-                                {
-                                    color: 'red',
-                                    description: 'rebaixado'
-                                }
-                            ]}
-                        />
                     </Col>
                     <Col md={12} lg={5}>
                         <WeekGames />

@@ -41,7 +41,6 @@ export const fetch = () => (dispatch, getState) => {
                 type: SELECT_WEEK,
                 payload: (weeks.length - 1)
             });
-
             return groupTeamMatches(getTeams(), weeks);
         })
         .then((teamGames) => {
@@ -62,9 +61,7 @@ export const fetch = () => (dispatch, getState) => {
                 payload: ranking
             });
         })
-        .catch((error) => {
-            console.log(error);
-            
+        .catch((error) => {            
             dispatch({
                 type: FETCH_WEEKS_ERROR,
                 payload: error.message

@@ -44,7 +44,7 @@ class WeekGames extends React.PureComponent {
             <Container key={index}>
                 <Row>
                     <Col xs={3} className="text-right">
-                        {homeTeamBold ? (<strong style={styles.textWinner}>{homeTeam.shortName}</strong>) : homeTeam.shortName}
+                        {homeTeamBold ? (<span style={styles.textWinner}>{homeTeam.shortName}</span>) : homeTeam.shortName}
                     </Col>
                     <Col xs={6} className="text-center">
                         <img 
@@ -60,7 +60,7 @@ class WeekGames extends React.PureComponent {
                         />
                     </Col>
                     <Col xs={3} className="text-left">
-                        {awayTeamBold ? (<strong style={styles.textWinner}>{awayTeam.shortName}</strong>) : awayTeam.shortName}
+                        {awayTeamBold ? (<span style={styles.textWinner}>{awayTeam.shortName}</span>) : awayTeam.shortName}
                     </Col>
                 </Row>
                 <hr/>
@@ -105,7 +105,7 @@ class WeekGames extends React.PureComponent {
 
 const styles = {
     textWinner: {
-        fontSize: 14,
+        fontWeight: 'bold',
         color: 'green'
     },   
     logo: {
