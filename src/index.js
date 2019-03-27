@@ -1,17 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  HashRouter,
-  Switch,
-  Route
-} from 'react-router-dom';
+import Routes from './screens';
 import * as serviceWorker from './serviceWorker';
-
-// Import Screens
-import RankingScreen from './screens/RankingScreen';
-import TeamsScreen from './screens/TeamsScreen';
-import TeamScreen from './screens/TeamScreen';
-import WeeksScreen from './screens/WeeksScreen';
 
 // Import Redux
 import { Provider } from 'react-redux';
@@ -20,29 +10,17 @@ import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import StoreProvider from './configs/store';
 
-// Header component
-import Header from './components/Header';
-
-
 // Configure the reducer
 const configureStore = () => createStore(reducers, {}, applyMiddleware(reduxThunk));
 StoreProvider.init(configureStore);
 const store = StoreProvider.getStore();
 
-const Routes = (
+const Main = (
   <Provider store={store}>
-    <HashRouter>
-      <div>
-        <Header />
-        <Switch>
-          <Route path='/' exact={true} component={RankingScreen} />
-          <Route path='/teams/:index' component={TeamScreen} />
-        </Switch>
-      </div>
-    </HashRouter>
+    <Routes/>
   </Provider>
 );
 
-ReactDOM.render(Routes, document.getElementById('root'));
+ReactDOM.render(Main, document.getElementById('root'));
 
 serviceWorker.unregister();
