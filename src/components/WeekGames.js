@@ -9,12 +9,11 @@ import {
     connect
 } from 'react-redux';
 import {
-    getWeek, 
+    getWeek,
     getWeeks
 } from '../selectors/weeksSelector';
 import {
-    getTeams,
-    getTeam
+    getTeams
 } from '../selectors/teamsSelector';
 import {
     data as weekSelected
@@ -26,9 +25,9 @@ import {
 import Result from '../components/Result';
 
 class WeekGames extends React.PureComponent {
-    
+
     onClickNavigateBack = () => this.props.selectPreviousWeek();
-    
+
     onClickNavigateNext = () => this.props.selectNextWeek();
 
     renderResults = (game, index) => {
@@ -38,7 +37,7 @@ class WeekGames extends React.PureComponent {
                     game={game}
                     index={index}
                 />
-                <hr/>
+                <hr />
             </Container>
         )
     }
@@ -49,8 +48,8 @@ class WeekGames extends React.PureComponent {
                 <Col className="text-left float-left">
                     { // Hide back button if already in first week
                         this.props.week !== 1 &&
-                        <Button 
-                            variant="light" 
+                        <Button
+                            variant="light"
                             onClick={this.onClickNavigateBack}
                             disabled={this.props.week === 1}
                         >
@@ -58,42 +57,24 @@ class WeekGames extends React.PureComponent {
                         </Button>
                     }
                 </Col>
-                <Col className="text-center" style={{alignSelf: 'center'}}>Week <strong>#{this.props.week}</strong></Col>
+                <Col className="text-center" style={{ alignSelf: 'center' }}>Week <strong>#{this.props.week}</strong></Col>
                 <Col className="text-right float-right">
                     { // Hide next button if already in last week
                         this.props.week !== (this.props.weeks.length - 1) &&
-                        <Button 
-                            variant="light" 
+                        <Button
+                            variant="light"
                             onClick={this.onClickNavigateNext}
                         >
-                            {'>'} 
+                            {'>'}
                         </Button>
                     }
                 </Col>
-                <Row style={{marginTop: 15, marginBottom: 15}}>
+                <Row style={{ marginTop: 15, marginBottom: 15 }}>
                     {this.props.weekGame.map(this.renderResults)}
                 </Row>
             </Row>
         );
     };
-};
-
-const styles = {
-    textWinner: {
-        fontWeight: 'bold',
-        color: 'green'
-    },   
-    logo: {
-        height: 30,
-        width: 30,
-        padding: 2
-    },
-    textScoreBoard: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        paddingLeft: 4,
-        paddingRight: 4
-    }
 };
 
 const mapStateToProps = (state) => {
@@ -107,4 +88,4 @@ const mapStateToProps = (state) => {
     };
 }
 
-export default connect(mapStateToProps, {selectPreviousWeek, selectNextWeek})(WeekGames);
+export default connect(mapStateToProps, { selectPreviousWeek, selectNextWeek })(WeekGames);
