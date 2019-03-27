@@ -23,7 +23,7 @@ class Team extends Component {
 
     renderResults = (match, index) => {
         return (
-            <ListGroup.Item>
+            <ListGroup.Item key={index}>
                 <Result 
                     game={match}
                     team={this.props.team}
@@ -34,9 +34,7 @@ class Team extends Component {
         );
     };
 
-    render() {
-        console.log('props', this.props);
-        
+    render() {        
         return (
             <Container>
                 <Row style={styles.container}>
