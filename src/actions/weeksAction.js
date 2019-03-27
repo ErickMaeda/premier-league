@@ -81,6 +81,7 @@ export const fetch = () => (dispatch, getState) => {
  */
 const groupTeamMatches = (teams, weeks) => teams.map((team, index) => {
     team.matches = [];
+    team.id = index;
     weeks.forEach((week) => {
         let matches = week.filter((match) => match.teamIds.includes(index));
         if (matches.length > 0) {

@@ -53,7 +53,7 @@ class RankingTable extends React.PureComponent {
     renderRows = () => {
         return this.props.ranking.map((team, index) => {
             const club = (
-                <Link to={`/teams/${index}`}>
+                <Link to={`/teams/${team.id}`}>
                     <img style={styles.logo} src={team.logo} /> {truncate(team.name, 15)}
                 </Link>
             );
