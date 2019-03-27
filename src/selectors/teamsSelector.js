@@ -1,4 +1,4 @@
-import StoreProvider from '../configs/store';
+import StoreProvider from '../configs/storeProvider';
 
 export const getTeams = () => {
     const store = StoreProvider.getStore().store;

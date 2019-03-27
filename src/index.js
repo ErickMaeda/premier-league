@@ -5,7 +5,7 @@ import * as serviceWorker from './serviceWorker';
 
 // Import Redux
 import { Provider } from 'react-redux';
-import StoreProvider from './configs/store';
+import StoreProvider from './configs/storeProvider';
 import { PersistGate } from 'redux-persist/integration/react'
 import configureStore from './configs/configureStore';
 

@@ -15,23 +15,32 @@ class Result extends React.PureComponent {
 
     render() {
         const {
-            game
+            game,
+            showFullName,
+            index
         } = this.props;
 
+        if (!game) {
+            throw new Error('Param $game not found!');
+        }
         const homeTeamGoals = game.score[0];
         const awayTeamGoals = game.score[1];
         
-        const homeTeamBold = homeTeamGoals > awayTeamGoals;
-        const awayTeamBold = awayTeamGoals > homeTeamGoals;
-
+        
         const homeTeam = getTeam(game.teamIds[0]) || {};
         const awayTeam = getTeam(game.teamIds[1]) || {};
+        
+        let homeTeamName = showFullName ? homeTeam.name : homeTeam.shortName;
+        let awayTeamName = showFullName ? awayTeam.name : awayTeam.shortName;
+        
+        let homeTeamBold = homeTeamGoals > awayTeamGoals;
+        let awayTeamBold = awayTeamGoals > homeTeamGoals;
 
         return (
             <Container key={index}>
                 <Row>
                     <Col xs={3} className="text-right">
-                        {homeTeamBold ? (<span style={styles.textWinner}>{homeTeam.shortName}</span>) : homeTeam.shortName}
+                        {homeTeamBold ? (<span style={styles.textWinner}>{homeTeamName}</span>) : homeTeamName}
                     </Col>
                     <Col xs={6} className="text-center">
                         <img 
@@ -47,10 +56,9 @@ class Result extends React.PureComponent {
                         />
                     </Col>
                     <Col xs={3} className="text-left">
-                        {awayTeamBold ? (<span style={styles.textWinner}>{awayTeam.shortName}</span>) : awayTeam.shortName}
+                        {awayTeamBold ? (<span style={styles.textWinner}>{awayTeamName}</span>) : awayTeamName}
                     </Col>
                 </Row>
-                <hr/>
             </Container>
         );
     };

@@ -20,7 +20,7 @@ const Router = () => (
             <Header />
             <Switch>
                 <Route path='/' exact={true} component={RankingScreen} />
-                <Route path='/teams/:index' component={TeamScreen} />
+                <Route path='/teams/:id' component={TeamScreen} />
             </Switch>
         </div>
     </HashRouter>
