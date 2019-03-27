@@ -1,7 +1,7 @@
 import StoreProvider from '../configs/store';
 
 export const getTeams = () => {
-    const store = StoreProvider.getStore();
+    const store = StoreProvider.getStore().store;
     const teams = store.getState().teams;
     return teams.data || [];
 };

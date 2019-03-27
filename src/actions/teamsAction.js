@@ -18,7 +18,7 @@ import {
  * 
  * @returns Promise
  */
-export const fetch = () => (dispatch) => new Promise((resolve, reject) => {
+export const fetch = () => (dispatch) => new Promise((resolve, reject) => {    
     dispatch({ type: FETCH_TEAMS_LOADING });
     new Api()
         .setType('teams')

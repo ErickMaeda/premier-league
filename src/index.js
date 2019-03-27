@@ -5,20 +5,20 @@ import * as serviceWorker from './serviceWorker';
 
 // Import Redux
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import reduxThunk from 'redux-thunk';
-import reducers from './reducers';
 import StoreProvider from './configs/store';
+import { PersistGate } from 'redux-persist/integration/react'
+import configureStore from './configs/configureStore';
 
 // Configure the reducer
-const configureStore = () => createStore(reducers, {}, applyMiddleware(reduxThunk));
 StoreProvider.init(configureStore);
 const store = StoreProvider.getStore();
 
 const Main = (
-  <Provider store={store}>
-    <Routes/>
-  </Provider>
+	<Provider store={store.store}>
+		<PersistGate loading={null} persistor={store.persistor}>
+			<Routes />
+		</PersistGate>
+	</Provider>
 );
 
 ReactDOM.render(Main, document.getElementById('root'));

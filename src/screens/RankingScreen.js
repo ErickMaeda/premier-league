@@ -21,7 +21,7 @@ import LegendBox from '../components/LegendBox';
 
 class Ranking extends Component {
     
-    componentDidMount() {
+    componentDidMount() {        
         this.props.fetchTeams().then(this.props.fetchWeeks());
     }
 

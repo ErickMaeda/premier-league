@@ -1,7 +1,7 @@
 import StoreProvider from '../configs/store';
 
 export const getWeeks = () => {
-    const store = StoreProvider.getStore();
+    const store = StoreProvider.getStore().store;
     const weeks = store.getState().weeks;
     return weeks.data || [];
 };
