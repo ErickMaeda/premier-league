@@ -46,6 +46,7 @@ class Result extends React.PureComponent {
                         <img 
                             style={styles.logo} 
                             src={homeTeam.logo}
+                            alt={`${homeTeam.name} Logo`}
                         />
                         &nbsp;
                         <span style={styles.textScoreBoard}>{homeTeamGoals} x {awayTeamGoals}</span>
@@ -53,6 +54,7 @@ class Result extends React.PureComponent {
                         <img 
                             style={styles.logo} 
                             src={awayTeam.logo}
+                            alt={`${awayTeam.name} Logo`}
                         />
                     </Col>
                     <Col xs={3} className="text-left">

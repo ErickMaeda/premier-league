@@ -3,9 +3,6 @@ import {
     SELECT_PREVIOUS_WEEK,
     SELECT_NEXT_WEEK
 } from "./types";
-import {
-    data as weekSelected
-} from '../selectors/weekSelectedSelector';
 
 /**
  * @description
