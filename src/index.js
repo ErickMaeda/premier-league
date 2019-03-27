@@ -36,6 +36,7 @@ const Routes = (
         <Header />
         <Switch>
           <Route path='/' exact={true} component={RankingScreen} />
+          <Route path='/teams/:index' component={TeamScreen} />
         </Switch>
       </div>
     </HashRouter>

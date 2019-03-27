@@ -8,13 +8,13 @@
  * 
  */
 export const getColorByPosition = (position: Int): String => {
-    let color = '#fff'; // Default
+    let color = '#ffffffFF'; // Default
     if ((position >= 1) && (position <= 4)) {
-        color = '#eeeeee'; // UEFA Champions League qualified
+        color = '#eeeeeeFF'; // UEFA Champions League qualified
     } else if (position === 5) {
-        color = '#f5f5f5'; // UEFA Europa League qualified
+        color = '#f5f5f5FF'; // UEFA Europa League qualified
     } else if (position >= 18) {
-        color = '#ffebee'; // Downgrade risk
+        color = '#ffebeeFF'; // Downgrade risk
     }
     return color;
 }

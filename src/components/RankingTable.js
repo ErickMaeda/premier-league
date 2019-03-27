@@ -9,7 +9,7 @@ import {
 } from 'react-redux';
 import {
     getRanking,
-    getRankingError, 
+    getRankingError,
     getRankingProgress
 } from '../selectors/rankingSelector';
 import {
@@ -18,6 +18,7 @@ import {
 import {
     truncate
 } from '../helpers/Utils';
+import { Link } from 'react-router-dom';
 
 class RankingTable extends React.PureComponent {
 
@@ -26,7 +27,7 @@ class RankingTable extends React.PureComponent {
             <Spinner animation="grow" />
         );
     };
-    
+
     renderError = () => {
         return (
             <span>{this.props.error}</span>
@@ -54,7 +55,7 @@ class RankingTable extends React.PureComponent {
             return (
                 <tr key={index} style={{ backgroundColor: getColorByPosition(index + 1) }}>
                     <td><span>{index + 1}</span></td>
-                    <td><img style={styles.logo} src={team.logo} /> {truncate(team.name, 15)}</td>
+                    <td><Link to={`/teams/${index}`}><img style={styles.logo} src={team.logo} /> {truncate(team.name, 15)}</Link></td>
                     <td>{(team.wins + team.drawns + team.losses)}</td>
                     <td>{team.wins}</td>
                     <td>{team.drawns}</td>
@@ -71,7 +72,7 @@ class RankingTable extends React.PureComponent {
     render() {
         return (
             <Card>
-                <Table responsive>
+                <Table hover responsive>
                     <thead>
                         <tr>
                             <th>#</th>
