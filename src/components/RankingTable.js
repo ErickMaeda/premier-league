@@ -52,10 +52,15 @@ class RankingTable extends React.PureComponent {
 
     renderRows = () => {
         return this.props.ranking.map((team, index) => {
+            const club = (
+                <Link to={`/teams/${index}`} params={{team}}>
+                    <img style={styles.logo} src={team.logo} /> {truncate(team.name, 15)}
+                </Link>
+            );
             return (
                 <tr key={index} style={{ backgroundColor: getColorByPosition(index + 1) }}>
                     <td><span>{index + 1}</span></td>
-                    <td><Link to={`/teams/${index}`}><img style={styles.logo} src={team.logo} /> {truncate(team.name, 15)}</Link></td>
+                    <td>{club}</td>
                     <td>{(team.wins + team.drawns + team.losses)}</td>
                     <td>{team.wins}</td>
                     <td>{team.drawns}</td>

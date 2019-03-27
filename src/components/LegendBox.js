@@ -1,12 +1,8 @@
-import React, {
-    Component
-} from 'react';
+import React from 'react';
 import {
-    Button,
     Container,
     Row,
-    Col,
-    Card
+    Col
 } from 'react-bootstrap';
 import {
     connect
@@ -51,9 +47,4 @@ const styles = {
     }
 };
 
-const mapStateToProps = (state: Array) => {
-    return {
-    };
-}
-
-export default connect(mapStateToProps)(LegendBox);
+export default connect()(LegendBox);
