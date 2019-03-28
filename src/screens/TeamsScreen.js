@@ -27,7 +27,7 @@ class Teams extends Component {
                     </Link>
                 </Row>
                 <Row className="justify-content-center">
-                    <Card.Link class="text-center" href={`#teams/${index}`}>{team.name}</Card.Link>
+                    <Card.Link className="text-center" href={`#teams/${index}`}>{team.name}</Card.Link>
                 </Row>
             </Col>
         );
