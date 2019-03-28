@@ -74,8 +74,8 @@ const styles = {
         color: 'green'
     },
     logo: {
-        height: 30,
-        width: 30,
+        height: 25,
+        width: 25,
         padding: 2
     },
     textScoreBoard: {

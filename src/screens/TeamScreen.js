@@ -18,6 +18,7 @@ import {
 import {
     getTeam
 } from '../selectors/teamsSelector';
+import withSizeDetectionHoc from '../hocs/withSizeDetectionHoc';
 
 class Team extends Component {
 
@@ -34,21 +35,38 @@ class Team extends Component {
         );
     };
 
+    renderContentDesktopOrTablet = () => {
+        return (
+            <Card>
+                <Card.Header style={{flex: 1}}>
+                    <span className="text-center" style={{alignSelf: 'center'}}>Games on current Season</span>
+                </Card.Header>
+                <Card.Body>
+                    <ListGroup variant="flush">
+                        {this.props.teamRanking.matches.map(this.renderResults)}
+                    </ListGroup>
+                </Card.Body>
+            </Card>
+        );
+    }
+
+    renderContentMobile = () => {
+        return (
+            <div>
+                <h3 className="text-center" style={{alignSelf: 'center'}}>Games on current Season</h3>
+                <ListGroup variant="flush">
+                    {this.props.teamRanking.matches.map(this.renderResults)}
+                </ListGroup>
+            </div>
+        )
+    }
+
     render() {        
         return (
             <Container>
                 <Row style={styles.container}>
                     <Col md={12}>
-                        <Card>
-                            <Card.Header style={{flex: 1}}>
-                                <span className="text-center" style={{alignSelf: 'center'}}>Games on current Season</span>
-                            </Card.Header>
-                            <Card.Body>
-                                <ListGroup variant="flush">
-                                    {this.props.teamRanking.matches.map(this.renderResults)}
-                                </ListGroup>
-                            </Card.Body>
-                        </Card>
+                        {this.props.isMobile ? this.renderContentMobile() : this.renderContentDesktopOrTablet()}
                     </Col>
                 </Row>
             </Container>
@@ -78,4 +96,4 @@ const mapStateToProps = (state, props) => {
     }; 
 };
 
-export default connect(mapStateToProps)(Team);
+export default connect(mapStateToProps)(withSizeDetectionHoc(Team));
