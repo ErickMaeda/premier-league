@@ -28,8 +28,8 @@ class Team extends Component {
                 <Result 
                     game={match}
                     team={this.props.team}
-                    showFullName
                     index={index}
+                    showFullName
                 />
             </ListGroup.Item>
         );
@@ -38,8 +38,8 @@ class Team extends Component {
     renderContentDesktopOrTablet = () => {
         return (
             <Card>
-                <Card.Header style={{flex: 1}}>
-                    <span className="text-center" style={{alignSelf: 'center'}}>Games on current Season</span>
+                <Card.Header className="text-center">
+                    <span>Games on current Season</span>
                 </Card.Header>
                 <Card.Body>
                     <ListGroup variant="flush">
@@ -53,7 +53,7 @@ class Team extends Component {
     renderContentMobile = () => {
         return (
             <div>
-                <h3 className="text-center" style={{alignSelf: 'center'}}>Games on current Season</h3>
+                <h4 className="text-center">Games on current Season</h4>
                 <ListGroup variant="flush">
                     {this.props.teamRanking.matches.map(this.renderResults)}
                 </ListGroup>

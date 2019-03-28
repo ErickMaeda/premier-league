@@ -109,7 +109,8 @@ class RankingTable extends React.PureComponent {
 const styles = {
     logo: {
         height: 22,
-        width: 22
+        width: 22,
+        marginRight: 4
     }
 };
 
