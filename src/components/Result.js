@@ -10,14 +10,16 @@ import {
 import {
     getTeam
 } from '../selectors/teamsSelector';
+import withSizeDetectionHoc from '../hocs/withSizeDetectionHoc';
 
 class Result extends React.PureComponent {
 
-    render() {
+    render() {        
         const {
             game,
             showFullName,
-            index
+            index,
+            isMobile
         } = this.props;
 
         if (!game) {
@@ -30,8 +32,8 @@ class Result extends React.PureComponent {
         const homeTeam = getTeam(game.teamIds[0]) || {};
         const awayTeam = getTeam(game.teamIds[1]) || {};
         
-        let homeTeamName = showFullName ? homeTeam.name : homeTeam.shortName;
-        let awayTeamName = showFullName ? awayTeam.name : awayTeam.shortName;
+        let homeTeamName = (showFullName && !isMobile) ? homeTeam.name : homeTeam.shortName;
+        let awayTeamName = (showFullName && !isMobile) ? awayTeam.name : awayTeam.shortName;
         
         let homeTeamBold = homeTeamGoals > awayTeamGoals;
         let awayTeamBold = awayTeamGoals > homeTeamGoals;
@@ -84,4 +86,4 @@ const styles = {
     }
 };
 
-export default connect()(Result);
+export default connect()(withSizeDetectionHoc(Result));
