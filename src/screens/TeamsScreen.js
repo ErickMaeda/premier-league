@@ -20,15 +20,21 @@ class Teams extends Component {
 
     renderTeam = (team, index) => {
         return (
-            <Col xs={6} sm={4} md={3} key={index} style={styles.containerCard} className="justify-content-center">
-                <Row className="justify-content-center">
-                    <Link to={`/teams/${index}`}>
-                        <Card.Img variant="top" src={team.logo} style={styles.logo}/>
-                    </Link>
-                </Row>
-                <Row className="justify-content-center">
-                    <Card.Link className="text-center" href={`#teams/${index}`}>{team.name}</Card.Link>
-                </Row>
+            <Col xs={12} sm={6} md={4} lg={3} key={index} style={styles.containerCard} className="justify-content-center">
+                <Card>
+                    <Card.Header>
+                        <Row className="justify-content-center">
+                            <Card.Link className="text-center" href={`#teams/${index}`}>{team.name}</Card.Link>
+                        </Row>
+                    </Card.Header>
+                    <Card.Body>
+                        <Row className="justify-content-center">
+                            <Link to={`/teams/${index}`}>
+                                <Card.Img variant="top" src={team.logo} style={styles.logo}/>
+                            </Link>
+                        </Row>
+                    </Card.Body>
+                </Card>
             </Col>
         );
     }
