@@ -7,7 +7,8 @@ import {
     ListGroup,
     Card,
     Col,
-    Spinner
+    Spinner,
+    Breadcrumb
 } from 'react-bootstrap';
 import {
     connect
@@ -26,6 +27,21 @@ import withSizeDetectionHoc from '../hocs/withSizeDetectionHoc';
 import { Chart } from "react-google-charts";
 
 class Team extends Component {
+
+    renderBreadCrumb = () => {
+        const {
+            team: {
+                name
+            }
+        } = this.props;
+        return (
+            <Breadcrumb>
+                <Breadcrumb.Item href="#/">Home</Breadcrumb.Item>
+                <Breadcrumb.Item href="#/teams">Teams</Breadcrumb.Item>
+                <Breadcrumb.Item active>{name}</Breadcrumb.Item>
+            </Breadcrumb>
+        )
+    }
 
     renderResults = (match, index) => {
         return (
@@ -185,6 +201,11 @@ class Team extends Component {
     render() {
         return (
             <Container style={styles.container}>
+                <Row>
+                    <Col md={12}>
+                        {this.renderBreadCrumb()}
+                    </Col>
+                </Row>
                 <Row>
                     <Col md={12}>
                         {this.renderTeamStats()}

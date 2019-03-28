@@ -9,7 +9,7 @@ import {
 import RankingScreen from './RankingScreen';
 import TeamsScreen from './TeamsScreen';
 import TeamScreen from './TeamScreen';
-import WeeksScreen from './WeeksScreen';
+import AboutScreen from './AboutScreen';
 
 // Header component
 import Header from '../components/Header';
@@ -22,6 +22,7 @@ const Router = () => (
                 <Route path='/' exact={true} component={RankingScreen} />
                 <Route path='/teams/:id' component={TeamScreen} />
                 <Route path='/teams' component={TeamsScreen} />
+                <Route path='/about' component={AboutScreen} />
             </Switch>
         </div>
     </HashRouter>

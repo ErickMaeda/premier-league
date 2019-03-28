@@ -6,7 +6,8 @@ import {
     Row,
     Card,
     Col,
-    CardDeck
+    CardDeck,
+    Breadcrumb
 } from 'react-bootstrap';
 import {
     connect
@@ -18,6 +19,15 @@ import { Link } from 'react-router-dom';
 
 class Teams extends Component {
 
+    renderBreadCrumb = () => {
+        return (
+            <Breadcrumb>
+                <Breadcrumb.Item href="#/">Home</Breadcrumb.Item>
+                <Breadcrumb.Item active>Teams</Breadcrumb.Item>
+            </Breadcrumb>
+        )
+    }
+    
     renderTeam = (team, index) => {
         return (
             <Col xs={12} sm={6} md={4} lg={3} key={index} style={styles.containerCard} className="justify-content-center">
@@ -56,6 +66,11 @@ class Teams extends Component {
     render() {
         return (
             <Container style={styles.container}>
+                <Row>
+                    <Col md={12}>
+                        {this.renderBreadCrumb()}
+                    </Col>
+                </Row>
                 <Row>
                     <Col md={12}>
                         {this.renderTeams()}

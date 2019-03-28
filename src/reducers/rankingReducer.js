@@ -15,7 +15,7 @@ export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case FETCH_RANKING_PROGRESS:
             return {
-                data: [],
+                data: state.data,
                 progress: action.payload,
                 error: null
             };

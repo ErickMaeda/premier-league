@@ -4,7 +4,8 @@ import React, {
 import {
     Container,
     Row,
-    Col
+    Col,
+    Card
 } from 'react-bootstrap';
 import {
     connect
@@ -21,7 +22,7 @@ import LegendBox from '../components/LegendBox';
 
 class Ranking extends Component {
     
-    componentDidMount() {        
+    componentDidMount() {
         this.refreshData();
     }
 
@@ -32,7 +33,9 @@ class Ranking extends Component {
             <Container>
                 <Row style={styles.container}>
                     <Col md={12} lg={7}>
-                        <RankingTable refreshData={this.refreshData} />
+                        <Card>
+                            <RankingTable refreshData={this.refreshData} />
+                        </Card>
                     </Col>
                     <Col md={12} lg={5}>
                         <WeekGames />

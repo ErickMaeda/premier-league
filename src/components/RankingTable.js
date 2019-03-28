@@ -81,33 +81,34 @@ class RankingTable extends React.PureComponent {
         const {
             error,
             progress,
+            ranking
         } = this.props;
-
-        if (error) return this.renderError();
-        if (progress) return this.renderProgress();
+        
+        if (ranking.length === 0) {
+            if (error) return this.renderError();
+            if (progress) return this.renderProgress();
+        }
 
         return (
-            <Card style={styles.container}>
-                <Table hover responsive>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Club</th>
-                            <th>Played</th>
-                            <th>W</th>
-                            <th>D</th>
-                            <th>L</th>
-                            <th>GF</th>
-                            <th>GA</th>
-                            <th>GD</th>
-                            <th>Pts</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.renderRows()}
-                    </tbody>
-                </Table>
-            </Card>
+            <Table hover responsive>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Club</th>
+                        <th>Played</th>
+                        <th>W</th>
+                        <th>D</th>
+                        <th>L</th>
+                        <th>GF</th>
+                        <th>GA</th>
+                        <th>GD</th>
+                        <th>Pts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.renderRows()}
+                </tbody>
+            </Table>
         );
     };
 };
