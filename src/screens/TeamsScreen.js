@@ -27,7 +27,7 @@ class Teams extends Component {
                     </Link>
                 </Row>
                 <Row className="justify-content-center">
-                    <Card.Link href={`#teams/${index}`}>{team.name}</Card.Link>
+                    <Card.Link class="text-center" href={`#teams/${index}`}>{team.name}</Card.Link>
                 </Row>
             </Col>
         );
@@ -67,13 +67,11 @@ const styles = {
     },
     containerCard: {
         marginTop: 15,
-        marginBottom: 15,
-        backgroundColor: 'green'
+        marginBottom: 15
     },
     logo: {
         height: 80,
-        width: 80,
-        backgroundColor: 'red'
+        width: 80
     }
 };
 
