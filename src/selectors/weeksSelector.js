@@ -1,9 +1,14 @@
 import StoreProvider from '../configs/storeProvider';
 
-export const getWeeks = () => {
+const getReducer = () => {
     const store = StoreProvider.getStore().store;
-    const weeks = store.getState().weeks;
-    return weeks.data || [];
+    const reducer = store.getState().weeks;
+    return reducer;
+};
+
+export const getWeeks = () => {
+    const reducer = getReducer();
+    return reducer.data || [];
 };
 
 export const getWeek = (week) => {

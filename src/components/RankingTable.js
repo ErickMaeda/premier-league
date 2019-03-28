@@ -2,7 +2,9 @@ import React from 'react';
 import {
     Table,
     Card,
-    Spinner
+    Spinner,
+    Row,
+    Alert
 } from 'react-bootstrap';
 import {
     connect
@@ -24,29 +26,24 @@ class RankingTable extends React.PureComponent {
 
     renderProgress = () => {
         return (
-            <Spinner animation="grow" />
+            <Row className="justify-content-center" style={styles.container}>
+                <Spinner animation="grow" />
+            </Row>
         );
     };
 
     renderError = () => {
-        return (
-            <span>{this.props.error}</span>
-        );
-    };
+        const {
+            error,
+            refreshData
+        } = this.props;
 
-    renderPlaceholder = () => {
-        let component;
-        if (this.props.error) {
-            component = this.renderError();
-        } else {
-            component = this.renderProgress();
-        }
         return (
-            <tr>
-                <td colSpan="10" className="text-center">
-                    {component}
-                </td>
-            </tr>
+            <Row className="justify-content-center"  style={styles.container}>
+                <Alert variant='warning'>
+                    <span className="text-center">Something went wrong: <strong>{error}</strong>. Do you want to <Alert.Link onClick={refreshData}>try again?</Alert.Link></span>
+                </Alert>
+            </Row>
         );
     };
 
@@ -80,8 +77,17 @@ class RankingTable extends React.PureComponent {
     };
 
     render() {
+
+        const {
+            error,
+            progress,
+        } = this.props;
+
+        if (error) return this.renderError();
+        if (progress) return this.renderProgress();
+
         return (
-            <Card>
+            <Card style={styles.container}>
                 <Table hover responsive>
                     <thead>
                         <tr>
@@ -98,7 +104,7 @@ class RankingTable extends React.PureComponent {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.ranking.length > 0 ? this.renderRows() : this.renderPlaceholder()}
+                        {this.renderRows()}
                     </tbody>
                 </Table>
             </Card>
@@ -111,6 +117,10 @@ const styles = {
         height: 22,
         width: 22,
         marginRight: 4
+    },
+    container: {
+        marginTop: 10,
+        marginBottom: 10
     }
 };
 

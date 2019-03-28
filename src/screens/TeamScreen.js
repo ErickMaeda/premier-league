@@ -123,18 +123,18 @@ class Team extends Component {
 
         return (
             <Container style={styles.containerHeader}>
-                <Row className="justify-content-md-center" style={styles.container}>
+                <Row className="justify-content-center" style={styles.container}>
                     <h3>Season Stats</h3>
                 </Row>
                 <Row style={styles.container}>
                     <Col xs={12} sm={6} md={3}>
-                        <Row className="justify-content-md-center" style={styles.container}>
+                        <Row className="justify-content-center" style={styles.container}>
                             <img
                                 src={team.logo}
                                 alt={team.name}
                             />
                         </Row>
-                        <Row className="justify-content-md-center" style={styles.container}>
+                        <Row className="justify-content-center" style={styles.container}>
                             <h5>{team.name}</h5>
                         </Row>
                     </Col>

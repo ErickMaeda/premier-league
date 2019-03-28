@@ -20,13 +20,13 @@ class Teams extends Component {
 
     renderTeam = (team, index) => {
         return (
-            <Col key={index} sm={4} style={styles.container} className="justify-content-md-center">
-                <Row className="justify-content-md-center">
+            <Col xs={6} sm={4} md={3} key={index} style={styles.containerCard} className="justify-content-center">
+                <Row className="justify-content-center">
                     <Link to={`/teams/${index}`}>
                         <Card.Img variant="top" src={team.logo} style={styles.logo}/>
                     </Link>
                 </Row>
-                <Row className="justify-content-md-center">
+                <Row className="justify-content-center">
                     <Card.Link href={`#teams/${index}`}>{team.name}</Card.Link>
                 </Row>
             </Col>
@@ -40,7 +40,9 @@ class Teams extends Component {
 
         return (
             <CardDeck style={styles.container}>
-                {teams.map(this.renderTeam)}
+                <Row className="justify-content-center">
+                    {teams.map(this.renderTeam)}
+                </Row>
             </CardDeck>
         );
     }
@@ -63,9 +65,15 @@ const styles = {
         marginTop: 15,
         marginBottom: 15
     },
+    containerCard: {
+        marginTop: 15,
+        marginBottom: 15,
+        backgroundColor: 'green'
+    },
     logo: {
         height: 80,
-        width: 80
+        width: 80,
+        backgroundColor: 'red'
     }
 };
 

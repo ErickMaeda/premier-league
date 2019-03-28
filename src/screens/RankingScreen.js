@@ -22,15 +22,17 @@ import LegendBox from '../components/LegendBox';
 class Ranking extends Component {
     
     componentDidMount() {        
-        this.props.fetchTeams().then(this.props.fetchWeeks);
+        this.refreshData();
     }
+
+    refreshData = () => this.props.fetchTeams().then(this.props.fetchWeeks);
 
     render() {
         return (
             <Container>
                 <Row style={styles.container}>
                     <Col md={12} lg={7}>
-                        <RankingTable />
+                        <RankingTable refreshData={this.refreshData} />
                     </Col>
                     <Col md={12} lg={5}>
                         <WeekGames />

@@ -1,9 +1,14 @@
 import StoreProvider from '../configs/storeProvider';
 
-export const getTeams = () => {
+const getReducer = () => {
     const store = StoreProvider.getStore().store;
-    const teams = store.getState().teams;
-    return teams.data || [];
+    const reducer = store.getState().teams;
+    return reducer;
+};
+
+export const getTeams = () => {
+    const reducer = getReducer();
+    return reducer.data || [];
 };
 
 export const getTeam = (teamId) => {

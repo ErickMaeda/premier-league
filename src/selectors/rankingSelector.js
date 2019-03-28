@@ -3,10 +3,15 @@ import {
     getTeam
 } from './teamsSelector';
 
-export const getRanking = () => {
+const getReducer = () => {
     const store = StoreProvider.getStore().store;
-    const ranking = store.getState().ranking;
-    return ranking.data || [];
+    const reducer = store.getState().ranking;
+    return reducer;
+};
+
+export const getRanking = () => {
+    const reducer = getReducer();
+    return reducer.data || [];
 };
 
 export const getRankingTeam = (teamId) => {
@@ -17,11 +22,11 @@ export const getRankingTeam = (teamId) => {
 };
 
 export const getRankingError = () => {
-    const ranking = getRanking();
-    return ranking.error || null;
+    const reducer = getReducer();
+    return reducer.error || null;
 };
 
 export const getRankingProgress = () => {
-    const ranking = getRanking();
-    return ranking.progress || null;
+    const reducer = getReducer();
+    return reducer.progress || null;
 };
