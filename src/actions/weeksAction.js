@@ -183,9 +183,19 @@ const computeRanking = (teams) => teams.map((team) => {
         } else {
             return -1;
         }
+    })
+    .map((team, index) => {
+        team.ranking = (index + 1);
+        return team;
     });
 
-
+/**
+ * @description
+ * Dispatch action to reducer with progress descriptions
+ * 
+ * @param {Function} dispatch 
+ * @param {String} progress 
+ */
 const onProgressUpdate = (dispatch, progress) => {
     dispatch({
         type: FETCH_RANKING_PROGRESS,

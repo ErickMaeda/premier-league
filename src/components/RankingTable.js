@@ -13,7 +13,7 @@ import {
     getRankingProgress
 } from '../selectors/rankingSelector';
 import {
-    getColorByPosition
+    getBackgroundColorByPosition
 } from '../helpers/RankingHelper';
 import {
     truncate
@@ -63,8 +63,8 @@ class RankingTable extends React.PureComponent {
                 </Link>
             );
             return (
-                <tr key={index} style={{ backgroundColor: getColorByPosition(index + 1) }}>
-                    <td><span>{index + 1}</span></td>
+                <tr key={index} style={{ backgroundColor: getBackgroundColorByPosition(index + 1) }}>
+                    <td>{team.ranking}</td>
                     <td>{club}</td>
                     <td>{(team.wins + team.drawns + team.losses)}</td>
                     <td>{team.wins}</td>
