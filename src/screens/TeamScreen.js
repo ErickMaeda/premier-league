@@ -116,8 +116,8 @@ class Team extends Component {
 
         return (
             <Chart
-                chartType="LineChart"
-                data={[["Matches", "Points"], [0,0], ...data]}
+                chartType="Line"
+                data={[["Matches", teamRanking.name], [0,0], ...data]}
                 width="100%"
                 loader={<Spinner/>}
                 height="400px"
@@ -212,7 +212,7 @@ class Team extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col md={12}>
+                    <Col md={12} className="justify-content-center">
                         {this.props.isMobile ? this.renderWeekGamesMobile() : this.renderWeekGamesDesktopOrTablet()}
                     </Col>
                 </Row>

@@ -19,9 +19,13 @@ import {
 import RankingTable from '../components/RankingTable';
 import WeekGames from '../components/WeekGames';
 import LegendBox from '../components/LegendBox';
+import withSizeDetectionHoc from '../hocs/withSizeDetectionHoc';
+import { getRanking } from '../selectors/rankingSelector';
+import { getWeeks } from '../selectors/weeksSelector';
+import { getTeams } from '../selectors/teamsSelector';
 
 class Ranking extends Component {
-    
+
     componentDidMount() {
         this.refreshData();
     }
@@ -29,19 +33,32 @@ class Ranking extends Component {
     refreshData = () => this.props.fetchTeams().then(this.props.fetchWeeks);
 
     render() {
-        return (
-            <Container>
+
+        const {
+            isMobile
+        } = this.props;
+
+        const rankingTableComponent = <RankingTable refreshData={this.refreshData} />;
+        const weekGamesComponent = <WeekGames />;
+        const contentComponent = (
+            <Row>
                 <Row style={styles.container}>
                     <Col md={12} lg={7}>
-                        <Card>
-                            <RankingTable refreshData={this.refreshData} />
-                        </Card>
+                        {!isMobile ? <Card>{rankingTableComponent}</Card> : <div>{rankingTableComponent}</div>}
                     </Col>
                     <Col md={12} lg={5}>
-                        <WeekGames />
+                        <Card>
+                            {!isMobile ? <Card>{weekGamesComponent}</Card> : <div>{weekGamesComponent}</div>}
+                        </Card>
                     </Col>
                 </Row>
-            </Container>
+            </Row>
+        );
+        if (isMobile) {
+            return (contentComponent);
+        }
+        return (
+            <Container>{contentComponent}</Container>
         );
     }
 };
@@ -53,4 +70,12 @@ const styles = {
     }
 };
 
-export default connect(null, { fetchWeeks, fetchTeams })(Ranking);
+const mapStateToProps = (state) => {
+    return {
+        ranking: getRanking(),
+        weeks: getWeeks(),
+        teams: getTeams()
+    };
+};
+
+export default connect(mapStateToProps, { fetchWeeks, fetchTeams })(withSizeDetectionHoc(Ranking));

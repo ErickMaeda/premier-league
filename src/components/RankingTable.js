@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     Table,
-    Card,
     Spinner,
     Row,
     Alert
