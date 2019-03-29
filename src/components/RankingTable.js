@@ -89,7 +89,7 @@ class RankingTable extends React.PureComponent {
         }
 
         return (
-            <Table hover responsive size='sm'>
+            <Table responsive size='sm'>
                 <thead>
                     <tr>
                         <th>#</th>
