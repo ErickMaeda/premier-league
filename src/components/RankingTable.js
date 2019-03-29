@@ -47,6 +47,12 @@ class RankingTable extends React.PureComponent {
         );
     };
 
+    renderRow = (row, colSpan = 1) => {
+        return (
+            <td colSpan={colSpan} style={styles.row}>{row}</td>
+        );
+    };
+
     renderRows = () => {
         return this.props.ranking.map((team, index) => {
             const club = (
@@ -61,16 +67,16 @@ class RankingTable extends React.PureComponent {
             );
             return (
                 <tr key={index} style={{ backgroundColor: getBackgroundColorByPosition(index + 1) }}>
-                    <td>{team.ranking}</td>
-                    <td>{club}</td>
-                    <td>{(team.wins + team.drawns + team.losses)}</td>
-                    <td>{team.wins}</td>
-                    <td>{team.drawns}</td>
-                    <td>{team.losses}</td>
-                    <td>{team.goalsFor}</td>
-                    <td>{team.goalsAgainst}</td>
-                    <td>{team.goalsDifference}</td>
-                    <td>{team.points}</td>
+                    {this.renderRow(team.ranking)}
+                    {this.renderRow(club, 3)}
+                    {this.renderRow((team.wins + team.drawns + team.losses))}
+                    {this.renderRow(team.wins)}
+                    {this.renderRow(team.drawns)}
+                    {this.renderRow(team.losses)}
+                    {this.renderRow(team.goalsFor)}
+                    {this.renderRow(team.goalsAgainst)}
+                    {this.renderRow(team.goalsDifference)}
+                    {this.renderRow(team.points)}
                 </tr>
             );
         });
@@ -90,12 +96,12 @@ class RankingTable extends React.PureComponent {
         }
 
         return (
-            <Table hover responsive>
+            <Table hover responsive size='sm'>
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Club</th>
-                        <th>Played</th>
+                        <th colSpan={3}>Club</th>
+                        <th>Pls</th>
                         <th>W</th>
                         <th>D</th>
                         <th>L</th>
@@ -122,6 +128,9 @@ const styles = {
     container: {
         marginTop: 10,
         marginBottom: 10
+    },
+    row: {
+        fontSize: 14
     }
 };
 
