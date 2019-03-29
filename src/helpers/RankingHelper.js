@@ -23,15 +23,15 @@ export const getAllBackgroundColorsAndDescription = () => {
     return [
         {
             color: '#E3F2FD',
-            description: 'Champions League group stage'
+            description: 'Champions League'
         },
         {
             color: '#E8F5E9',
-            description: 'UEFA Europa League group stage'
+            description: 'UEFA Europa League'
         },
         {
             color: '#FFEBEE',
-            description: 'Relagation group stage'
+            description: 'Relagation'
         },
     ];
 }

@@ -69,13 +69,20 @@ class WeekGames extends React.PureComponent {
                         </Button>
                     }
                 </Col>
-                <Row style={{ marginTop: 15, marginBottom: 15 }}>
+                <Container style={styles.container}>
                     {this.props.weekGame.map(this.renderResults)}
-                </Row>
+                </Container>
             </Row>
         );
     };
 };
+
+const styles = {
+    container: { 
+        marginTop: 15, 
+        marginBottom: 15 
+    }
+}
 
 const mapStateToProps = (state) => {
     const week = weekSelected(state);
