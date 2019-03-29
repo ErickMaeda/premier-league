@@ -7,17 +7,18 @@ import {
     Card,
     Col,
     CardDeck,
-    Breadcrumb
+    Breadcrumb,
+    Spinner,
+    Alert
 } from 'react-bootstrap';
-import {
-    connect
-} from 'react-redux';
-import {
-    getTeams
-} from '../selectors/teamsSelector';
+import { connect } from 'react-redux';
+import { getTeams, getTeamLoading } from '../selectors/teamsSelector';
 import { Link } from 'react-router-dom';
+import { fetch as fetchTeams } from '../actions/teamsAction';
 
 class Teams extends Component {
+
+    refreshData = () => this.props.fetchTeams().then(this.props.fetchWeeks);
 
     renderBreadCrumb = () => {
         return (
@@ -27,7 +28,7 @@ class Teams extends Component {
             </Breadcrumb>
         )
     }
-    
+
     renderTeam = (team, index) => {
         return (
             <Col xs={12} sm={6} md={4} lg={3} key={index} style={styles.containerCard} className="justify-content-center">
@@ -40,7 +41,7 @@ class Teams extends Component {
                     <Card.Body>
                         <Row className="justify-content-center">
                             <Link to={`/teams/${index}`}>
-                                <Card.Img variant="top" src={team.logo} style={styles.logo}/>
+                                <Card.Img variant="top" src={team.logo} style={styles.logo} />
                             </Link>
                         </Row>
                     </Card.Body>
@@ -63,7 +64,34 @@ class Teams extends Component {
         );
     }
 
+    renderProgress = () => {
+        return (
+            <Row className="justify-content-center" style={styles.container}>
+                <Spinner animation="grow" />
+            </Row>
+        );
+    };
+
+    renderError = () => {
+        return (
+            <Row className="justify-content-center" style={styles.container}>
+                <Alert variant='warning'>
+                    <span className="text-center">Something went wrong. Do you want to <Alert.Link onClick={this.refreshData}>try again?</Alert.Link></span>
+                </Alert>
+            </Row>
+        );
+    };
+
     render() {
+
+        const {
+            loading,
+            teams
+        } = this.props;
+
+        if (loading) return this.renderProgress();
+        if (teams.length == 0) return this.renderError();
+
         return (
             <Container style={styles.container}>
                 <Row>
@@ -98,8 +126,9 @@ const styles = {
 
 const mapStateToProps = () => {
     return {
-        teams: getTeams()
+        teams: getTeams(),
+        loading: getTeamLoading()
     };
 };
 
-export default connect(mapStateToProps)(Teams);
+export default connect(mapStateToProps, { fetchTeams })(Teams);

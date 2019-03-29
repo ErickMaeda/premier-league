@@ -16,7 +16,8 @@ export const getRanking = () => {
 
 export const getRankingTeam = (teamId) => {
     const ranking = getRanking();
-    const team = getTeam(teamId);    
+    const team = getTeam(teamId); 
+    if (!team) return {};
     const rankingTeam = ranking.filter((rankingTeam) => rankingTeam.name === team.name);
     return rankingTeam ? rankingTeam[0] : {};
 };

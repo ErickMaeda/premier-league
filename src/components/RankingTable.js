@@ -5,20 +5,14 @@ import {
     Row,
     Alert
 } from 'react-bootstrap';
-import {
-    connect
-} from 'react-redux';
+import { connect } from 'react-redux';
 import {
     getRanking,
     getRankingError,
     getRankingProgress
 } from '../selectors/rankingSelector';
-import {
-    getBackgroundColorByPosition
-} from '../helpers/RankingHelper';
-import {
-    truncate
-} from '../helpers/Utils';
+import { getBackgroundColorByPosition } from '../helpers/RankingHelper';
+import { truncate } from '../helpers/Utils';
 import { Link } from 'react-router-dom';
 
 class RankingTable extends React.PureComponent {
@@ -38,7 +32,7 @@ class RankingTable extends React.PureComponent {
         } = this.props;
 
         return (
-            <Row className="justify-content-center"  style={styles.container}>
+            <Row className="justify-content-center" style={styles.container}>
                 <Alert variant='warning'>
                     <span className="text-center">Something went wrong: <strong>{error}</strong>. Do you want to <Alert.Link onClick={refreshData}>try again?</Alert.Link></span>
                 </Alert>
@@ -56,11 +50,11 @@ class RankingTable extends React.PureComponent {
         return this.props.ranking.map((team, index) => {
             const club = (
                 <Link to={`/teams/${team.id}`}>
-                    <img 
-                        style={styles.logo} 
-                        src={team.logo} 
+                    <img
+                        style={styles.logo}
+                        src={team.logo}
                         alt={`${team.name} Logo`}
-                    /> 
+                    />
                     {truncate(team.name, 15)}
                 </Link>
             );
@@ -88,7 +82,7 @@ class RankingTable extends React.PureComponent {
             progress,
             ranking
         } = this.props;
-        
+
         if (ranking.length === 0) {
             if (error) return this.renderError();
             if (progress) return this.renderProgress();
