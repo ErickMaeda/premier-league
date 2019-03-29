@@ -43,7 +43,7 @@ class Ranking extends Component {
         );
         const weekGamesComponent = <WeekGames />;
         const contentComponent = (
-            <Container style={styles.container}>
+            <div style={styles.container}>
                 <Col md={12} lg={7}>
                     {!isMobile ? <Card>{rankingTableComponent}</Card> : <div>{rankingTableComponent}</div>}
                 </Col>
@@ -52,13 +52,21 @@ class Ranking extends Component {
                         {!isMobile ? <Card>{weekGamesComponent}</Card> : <div>{weekGamesComponent}</div>}
                     </Card>
                 </Col>
-            </Container>
+            </div>
         );
         if (isMobile) {
-            return (contentComponent);
+            return (
+                <Container style={styles.container}>
+                    {contentComponent}
+                </Container>
+            );
         }
         return (
-            <Container>{contentComponent}</Container>
+            <Container style={styles.container}>
+                <Row>
+                    {contentComponent}
+                </Row>
+            </Container>
         );
     }
 };
