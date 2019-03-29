@@ -51,7 +51,7 @@ class Result extends React.PureComponent {
                             alt={`${homeTeam.name} Logo`}
                         />
                         &nbsp;
-                        <span style={styles.textScoreBoard}>{homeTeamGoals} x {awayTeamGoals}</span>
+                        <span style={[styles.textScoreBoard, isMobile && styles.textMobile]}>{homeTeamGoals} x {awayTeamGoals}</span>
                         &nbsp;
                         <img 
                             style={styles.logo} 
@@ -83,6 +83,9 @@ const styles = {
         fontWeight: 'bold',
         paddingLeft: 4,
         paddingRight: 4
+    },
+    textMobile: {
+        fontSize: 12
     }
 };
 
