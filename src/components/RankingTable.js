@@ -75,7 +75,7 @@ class RankingTable extends React.PureComponent {
                     {this.renderRow(team.goalsFor)}
                     {this.renderRow(team.goalsAgainst)}
                     {this.renderRow(team.goalsDifference)}
-                    {this.renderRow(team.points)}
+                    <strong>{this.renderRow(team.points)}</strong>
                 </tr>
             );
         });
@@ -100,7 +100,7 @@ class RankingTable extends React.PureComponent {
                     <tr>
                         <th>#</th>
                         <th colSpan={3}>Club</th>
-                        <th>Pls</th>
+                        <th>MP</th>
                         <th>W</th>
                         <th>D</th>
                         <th>L</th>

@@ -23,6 +23,7 @@ import withSizeDetectionHoc from '../hocs/withSizeDetectionHoc';
 import { getRanking } from '../selectors/rankingSelector';
 import { getWeeks } from '../selectors/weeksSelector';
 import { getTeams } from '../selectors/teamsSelector';
+import { getAllBackgroundColorsAndDescription } from '../helpers/RankingHelper';
 
 class Ranking extends Component {
 
@@ -38,7 +39,12 @@ class Ranking extends Component {
             isMobile
         } = this.props;
 
-        const rankingTableComponent = <RankingTable refreshData={this.refreshData} />;
+        const rankingTableComponent = (
+            <div>
+                <RankingTable refreshData={this.refreshData} />
+                <LegendBox legends={getAllBackgroundColorsAndDescription()}/>
+            </div>
+        );
         const weekGamesComponent = <WeekGames />;
         const contentComponent = (
             <Row>
