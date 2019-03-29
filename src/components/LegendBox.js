@@ -10,9 +10,9 @@ import {
 
 class LegendBox extends React.PureComponent {
     
-    renderLegend = (legend) => {
+    renderLegend = (legend, index) => {
         return (
-            <Col md={4}>
+            <Col md={4} key={index}>
                 <Row className="justify-content-center">
                     <Row>
                         <div style={{...styles.circle, backgroundColor: legend.color}}></div>

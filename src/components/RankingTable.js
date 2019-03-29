@@ -46,9 +46,9 @@ class RankingTable extends React.PureComponent {
         );
     };
 
-    renderRow = (row, colSpan = 1) => {
+    renderRow = (row, colSpan = 1, withStrong = false) => {
         return (
-            <td colSpan={colSpan} style={styles.row}>{row}</td>
+            <td colSpan={colSpan} style={styles.row}>{withStrong ? (<strong>{row}</strong>) : (row)}</td>
         );
     };
 
@@ -75,7 +75,7 @@ class RankingTable extends React.PureComponent {
                     {this.renderRow(team.goalsFor)}
                     {this.renderRow(team.goalsAgainst)}
                     {this.renderRow(team.goalsDifference)}
-                    <strong>{this.renderRow(team.points)}</strong>
+                    {this.renderRow(team.points, null, true)}
                 </tr>
             );
         });
