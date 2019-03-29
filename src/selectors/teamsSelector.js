@@ -13,5 +13,10 @@ export const getTeams = () => {
 
 export const getTeam = (teamId) => {
     const teams = getTeams();
-    return teams[teamId];
+    return teams[teamId] || null;
+};
+
+export const getTeamLoading = (teamId) => {
+    const reducer = getReducer();
+    return reducer.loading || null;
 }

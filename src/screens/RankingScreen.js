@@ -10,12 +10,8 @@ import {
 import {
     connect
 } from 'react-redux';
-import {
-    fetch as fetchTeams
-} from '../actions/teamsAction';
-import {
-    fetch as fetchWeeks
-} from '../actions/weeksAction';
+import { fetch as fetchTeams } from '../actions/teamsAction';
+import { fetch as fetchWeeks } from '../actions/weeksAction';
 import RankingTable from '../components/RankingTable';
 import WeekGames from '../components/WeekGames';
 import LegendBox from '../components/LegendBox';
@@ -42,7 +38,7 @@ class Ranking extends Component {
         const rankingTableComponent = (
             <div>
                 <RankingTable refreshData={this.refreshData} />
-                <LegendBox legends={getAllBackgroundColorsAndDescription()}/>
+                <LegendBox legends={getAllBackgroundColorsAndDescription()} />
             </div>
         );
         const weekGamesComponent = <WeekGames />;

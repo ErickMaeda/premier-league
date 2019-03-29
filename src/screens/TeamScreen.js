@@ -8,25 +8,24 @@ import {
     Card,
     Col,
     Spinner,
-    Breadcrumb
+    Breadcrumb,
+    Alert
 } from 'react-bootstrap';
 import {
     connect
 } from 'react-redux';
 import Result from '../components/Result';
-import {
-    getRankingTeam
-} from '../selectors/rankingSelector';
-import {
-    getTeam
-} from '../selectors/teamsSelector';
-import {
-    getColorByPosition
-} from '../helpers/RankingHelper';
+import { getRankingTeam, getRankingProgress } from '../selectors/rankingSelector';
+import { getTeam } from '../selectors/teamsSelector';
+import { getColorByPosition } from '../helpers/RankingHelper';
 import withSizeDetectionHoc from '../hocs/withSizeDetectionHoc';
 import { Chart } from "react-google-charts";
+import { fetch as fetchTeams } from '../actions/teamsAction';
+import { fetch as fetchWeeks } from '../actions/weeksAction';
 
 class Team extends Component {
+
+    refreshData = () => this.props.fetchTeams().then(this.props.fetchWeeks);
 
     renderBreadCrumb = () => {
         const {
@@ -117,9 +116,9 @@ class Team extends Component {
         return (
             <Chart
                 chartType="Line"
-                data={[["Matches", teamRanking.name], [0,0], ...data]}
+                data={[["Matches", teamRanking.name], [0, 0], ...data]}
                 width="100%"
-                loader={<Spinner/>}
+                loader={<Spinner />}
                 height="400px"
                 legendToggle
             />
@@ -196,9 +195,37 @@ class Team extends Component {
                 </Row>
             </Container>
         );
-    }
+    };
+
+    renderProgress = () => {
+        return (
+            <Row className="justify-content-center" style={styles.container}>
+                <Spinner animation="grow" />
+            </Row>
+        );
+    };
+    
+    renderError = () => {
+        return (
+            <Row className="justify-content-center" style={styles.container}>
+                <Alert variant='warning'>
+                    <span className="text-center">Something went wrong. Do you want to <Alert.Link onClick={this.refreshData}>try again?</Alert.Link></span>
+                </Alert>
+            </Row>
+        );
+    };
 
     render() {
+
+        const {
+            team,
+            teamRanking,
+            progress
+        } = this.props;
+
+        if (progress) return this.renderProgress();
+        if (!team || !teamRanking) return this.renderError();
+
         return (
             <Container style={styles.container}>
                 <Row>
@@ -247,8 +274,9 @@ const mapStateToProps = (state, props) => {
 
     return {
         team: getTeam(id),
-        teamRanking: getRankingTeam(id)
+        teamRanking: getRankingTeam(id),
+        progress: getRankingProgress()
     };
 };
 
-export default connect(mapStateToProps)(withSizeDetectionHoc(Team));
+export default connect(mapStateToProps, { fetchTeams, fetchWeeks })(withSizeDetectionHoc(Team));
