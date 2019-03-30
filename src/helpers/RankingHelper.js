@@ -31,7 +31,7 @@ export const getAllBackgroundColorsAndDescription = () => {
         },
         {
             color: '#FFEBEE',
-            description: 'Relagation'
+            description: 'Relegation'
         },
     ];
 }

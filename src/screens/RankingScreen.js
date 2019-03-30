@@ -1,25 +1,18 @@
-import React, {
-    Component
-} from 'react';
-import {
-    Container,
-    Row,
-    Col,
-    Card
-} from 'react-bootstrap';
-import {
-    connect
-} from 'react-redux';
+import React, { Component } from 'react';
+import { Container, Row, Col, Card } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import { fetch as fetchTeams } from '../actions/teamsAction';
 import { fetch as fetchWeeks } from '../actions/weeksAction';
 import RankingTable from '../components/RankingTable';
 import WeekGames from '../components/WeekGames';
 import LegendBox from '../components/LegendBox';
 import withSizeDetectionHoc from '../hocs/withSizeDetectionHoc';
+import withHeaderHoc from '../hocs/withHeaderHoc';
 import { getRanking } from '../selectors/rankingSelector';
 import { getWeeks } from '../selectors/weeksSelector';
 import { getTeams } from '../selectors/teamsSelector';
 import { getAllBackgroundColorsAndDescription } from '../helpers/RankingHelper';
+import { compose } from 'redux'
 
 class Ranking extends Component {
 
@@ -91,4 +84,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { fetchWeeks, fetchTeams })(withSizeDetectionHoc(Ranking));
+export default connect(mapStateToProps, { fetchWeeks, fetchTeams })(compose(withHeaderHoc, withSizeDetectionHoc)(Ranking));

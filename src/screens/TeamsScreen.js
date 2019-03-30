@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import { getTeams, getTeamLoading } from '../selectors/teamsSelector';
 import { Link } from 'react-router-dom';
 import { fetch as fetchTeams } from '../actions/teamsAction';
+import withHeaderHoc from '../hocs/withHeaderHoc';
 
 class Teams extends Component {
 
@@ -90,7 +91,7 @@ class Teams extends Component {
         } = this.props;
 
         if (loading) return this.renderProgress();
-        if (teams.length == 0) return this.renderError();
+        if (teams.length === 0) return this.renderError();
 
         return (
             <Container style={styles.container}>
@@ -131,4 +132,4 @@ const mapStateToProps = () => {
     };
 };
 
-export default connect(mapStateToProps, { fetchTeams })(Teams);
+export default connect(mapStateToProps, { fetchTeams })(withHeaderHoc(Teams));

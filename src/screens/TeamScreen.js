@@ -19,9 +19,11 @@ import { getRankingTeam, getRankingProgress } from '../selectors/rankingSelector
 import { getTeam } from '../selectors/teamsSelector';
 import { getColorByPosition } from '../helpers/RankingHelper';
 import withSizeDetectionHoc from '../hocs/withSizeDetectionHoc';
+import withHeaderHoc from '../hocs/withHeaderHoc';
 import { Chart } from "react-google-charts";
 import { fetch as fetchTeams } from '../actions/teamsAction';
 import { fetch as fetchWeeks } from '../actions/weeksAction';
+import { compose } from 'redux';
 
 class Team extends Component {
 
@@ -279,4 +281,4 @@ const mapStateToProps = (state, props) => {
     };
 };
 
-export default connect(mapStateToProps, { fetchTeams, fetchWeeks })(withSizeDetectionHoc(Team));
+export default connect(mapStateToProps, { fetchTeams, fetchWeeks })(compose(withSizeDetectionHoc, withHeaderHoc)(Team));

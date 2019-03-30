@@ -1,18 +1,8 @@
 import React from 'react';
-import {
-    Table,
-    Spinner,
-    Row,
-    Alert
-} from 'react-bootstrap';
+import { Table, Spinner, Row, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import {
-    getRanking,
-    getRankingError,
-    getRankingProgress
-} from '../selectors/rankingSelector';
+import { getRanking, getRankingError, getRankingProgress } from '../selectors/rankingSelector';
 import { getBackgroundColorByPosition } from '../helpers/RankingHelper';
-import { truncate } from '../helpers/Utils';
 import { Link } from 'react-router-dom';
 
 class RankingTable extends React.PureComponent {

@@ -1,19 +1,9 @@
-import React, {
-    Component
-} from 'react';
-import {
-    Container,
-    Row,
-    Card,
-    Col,
-    Breadcrumb
-} from 'react-bootstrap';
-import {
-    connect
-} from 'react-redux';
-import withSizeDetectionHoc from '../hocs/withSizeDetectionHoc';
+import React, { Component } from 'react';
+import { Container, Row, Card, Col, Breadcrumb } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import LogoSky from '../assets/sky-logo.png';
 import ReactMarkdown from 'react-markdown';
+import withHeaderHoc from '../hocs/withHeaderHoc';
 
 const readme = `
     # REACT CHALLENGE
@@ -142,7 +132,7 @@ class Team extends Component {
                 <hr />
                 <Row>
                     <Col>
-                        <ReactMarkdown source={readme}/>
+                        <ReactMarkdown source={readme} />
                     </Col>
                 </Row>
             </Card>
@@ -227,4 +217,4 @@ const styles = {
     }
 };
 
-export default connect()(withSizeDetectionHoc(Team));
+export default connect()(withHeaderHoc(Team));

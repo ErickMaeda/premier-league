@@ -1,12 +1,6 @@
 import Api from '../services/Api';
-import {
-    FETCH_TEAMS_LOADING,
-    FETCH_TEAMS_SUCCESS,
-    FETCH_TEAMS_ERROR
-} from "./types";
-import {
-    getTeamShortName
-} from '../helpers/TeamsUtils';
+import { FETCH_TEAMS_LOADING, FETCH_TEAMS_SUCCESS, FETCH_TEAMS_ERROR } from "./types";
+import { getTeamShortName } from '../helpers/TeamsUtils';
 
 /**
  * @description
@@ -18,7 +12,7 @@ import {
  * 
  * @returns Promise
  */
-export const fetch = () => (dispatch) => new Promise((resolve, reject) => {    
+export const fetch = () => (dispatch) => new Promise((resolve, reject) => {
     dispatch({ type: FETCH_TEAMS_LOADING });
     new Api()
         .setType('teams')
@@ -41,7 +35,7 @@ export const fetch = () => (dispatch) => new Promise((resolve, reject) => {
         });
 });
 
-const addTeamLogo = (teams) => teams.map((team, index) => {        
+const addTeamLogo = (teams) => teams.map((team, index) => {
     const logo = new Api()
         .setType('logos')
         .setId(index)
