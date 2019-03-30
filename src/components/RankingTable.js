@@ -42,7 +42,7 @@ class RankingTable extends React.PureComponent {
 
     renderRow = (row, colSpan = 1, withStrong = false) => {
         return (
-            <td colSpan={colSpan} style={styles.row}>{withStrong ? (<strong>{row}</strong>) : (row)}</td>
+            <td colSpan={colSpan} style={styles.tableColumn}>{withStrong ? (<strong>{row}</strong>) : (row)}</td>
         );
     };
 
@@ -55,7 +55,7 @@ class RankingTable extends React.PureComponent {
                         src={team.logo}
                         alt={`${team.name} Logo`}
                     />
-                    {truncate(team.name, 15)}
+                    {team.name}
                 </Link>
             );
             return (
@@ -122,8 +122,10 @@ const styles = {
         marginTop: 10,
         marginBottom: 10
     },
-    row: {
-        fontSize: 14
+    tableColumn: {
+        fontSize: 14,
+        whiteSpace: 'nowrap',
+        overflow: 'hidden'
     }
 };
 

@@ -46,13 +46,11 @@ class Ranking extends Component {
         if (isMobile) {
             return (
                 <Container style={styles.container}>
-                    <Col md={12} lg={6}>
-                        {!isMobile ? <Card>{rankingTableComponent}</Card> : <div>{rankingTableComponent}</div>}
+                    <Col style={styles.colWithoutPadding}>
+                        {rankingTableComponent}
                     </Col>
-                    <Col md={12} lg={5}>
-                        <Card>
-                            {!isMobile ? <Card>{weekGamesComponent}</Card> : <div>{weekGamesComponent}</div>}
-                        </Card>
+                    <Col style={styles.colWithoutPadding}>
+                        {weekGamesComponent}
                     </Col>
                 </Container>
             );
@@ -60,12 +58,12 @@ class Ranking extends Component {
         return (
             <Container style={styles.container}>
                 <Row>
-                    <Col md={12} lg={6}>
-                        {!isMobile ? <Card>{rankingTableComponent}</Card> : <div>{rankingTableComponent}</div>}
+                    <Col md={12} lg={7}>
+                        <Card>{rankingTableComponent}</Card>
                     </Col>
                     <Col md={12} lg={5}>
                         <Card>
-                            {!isMobile ? <Card>{weekGamesComponent}</Card> : <div>{weekGamesComponent}</div>}
+                            <Card>{weekGamesComponent}</Card>
                         </Card>
                     </Col>
                 </Row>
@@ -78,6 +76,10 @@ const styles = {
     container: {
         marginTop: 15,
         marginBottom: 15
+    },
+    colWithoutPadding: {
+        paddingLeft: 0,
+        paddingRight: 0
     }
 };
 
