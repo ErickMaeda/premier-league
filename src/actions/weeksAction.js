@@ -39,7 +39,7 @@ export const fetch = () => (dispatch, getState) => {
             });
             dispatch({
                 type: SELECT_WEEK,
-                payload: (weeks.length - 1)
+                payload: weeks.length
             });
             return groupTeamMatches(getTeams(), weeks);
         })

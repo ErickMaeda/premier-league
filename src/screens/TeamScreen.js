@@ -1,19 +1,6 @@
-import React, {
-    Component
-} from 'react';
-import {
-    Container,
-    Row,
-    ListGroup,
-    Card,
-    Col,
-    Spinner,
-    Breadcrumb,
-    Alert
-} from 'react-bootstrap';
-import {
-    connect
-} from 'react-redux';
+import React, { Component } from 'react';
+import { Container, Row, ListGroup, Card, Col, Spinner, Breadcrumb, Alert } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import Result from '../components/Result';
 import { getRankingTeam, getRankingProgress } from '../selectors/rankingSelector';
 import { getTeam } from '../selectors/teamsSelector';
@@ -206,7 +193,7 @@ class Team extends Component {
             </Row>
         );
     };
-    
+
     renderError = () => {
         return (
             <Row className="justify-content-center" style={styles.container}>

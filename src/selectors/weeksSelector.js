@@ -13,6 +13,6 @@ export const getWeeks = () => {
 
 export const getWeek = (week) => {
     const weeks = getWeeks();
-    const weekGames = weeks[week];
+    const weekGames = weeks[(week - 1)];
     return weekGames || [];
 };

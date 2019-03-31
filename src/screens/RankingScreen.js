@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Spinner } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { fetch as fetchTeams } from '../actions/teamsAction';
 import { fetch as fetchWeeks } from '../actions/weeksAction';
@@ -13,6 +13,7 @@ import { getWeeks } from '../selectors/weeksSelector';
 import { getTeams } from '../selectors/teamsSelector';
 import { getAllBackgroundColorsAndDescription } from '../helpers/RankingHelper';
 import { compose } from 'redux'
+import { Chart } from "react-google-charts";
 
 class Ranking extends Component {
 
@@ -21,6 +22,64 @@ class Ranking extends Component {
     }
 
     refreshData = () => this.props.fetchTeams().then(this.props.fetchWeeks);
+
+    /**
+     * Calculate and render the chart
+     * with the increased points
+     */
+    renderChartWins = () => {
+
+        const {
+            ranking,
+            weeks
+        } = this.props;
+
+
+        const teamNames = ranking.slice(0, 5).map((teamRanking) => teamRanking.name);
+
+        const teamsWeeks = ranking.slice(0, 5).map((teamRanking, teamRankingIndex) => {
+            let points = 0;
+            const temporary = teamRanking.matches.map((match, index) => {
+                let currentTeamIndex;
+                let againstTeamIndex;
+                if (match.teamIds[0] === teamRanking.id) {
+                    currentTeamIndex = 0;
+                    againstTeamIndex = 1;
+                } else {
+                    currentTeamIndex = 1;
+                    againstTeamIndex = 0;
+                }
+                if (match.score[currentTeamIndex] > match.score[againstTeamIndex]) {
+                    points = points + 3;
+                } else if (match.score[currentTeamIndex] === match.score[againstTeamIndex]) {
+                    points++;
+                }
+                return points;
+            });
+            return temporary;
+        });
+
+        const weeksGraph = weeks.map((week, index) => {
+            const temporary = teamsWeeks.map((week) => {
+                return week[index];
+            });
+            temporary.unshift(index + 1);
+            return temporary;
+        });
+
+        const data = [["Week", ...teamNames], [0, 0, 0, 0, 0, 0], ...weeksGraph];
+
+        return (
+            <Chart
+                chartType="Line"
+                data={data}
+                width="100%"
+                loader={<Spinner />}
+                height="400px"
+                legendToggle
+            />
+        );
+    }
 
     render() {
 
@@ -50,13 +109,25 @@ class Ranking extends Component {
         }
         return (
             <Container style={styles.container}>
-                <Row>
+                <Row style={styles.container}>
                     <Col md={12} lg={7}>
                         <Card>{rankingTableComponent}</Card>
                     </Col>
                     <Col md={12} lg={5}>
                         <Card>
                             <Card>{weekGamesComponent}</Card>
+                        </Card>
+                    </Col>
+                </Row>
+                <Row style={styles.container}>
+                    <Col md={12}>
+                        <Card>
+                            <Card.Header>
+                                The best 5 Scores
+                            </Card.Header>
+                            <Card.Body>
+                                {this.renderChartWins()}
+                            </Card.Body>
                         </Card>
                     </Col>
                 </Row>

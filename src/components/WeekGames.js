@@ -1,27 +1,10 @@
 import React from 'react';
-import {
-    Button,
-    Container,
-    Row,
-    Col
-} from 'react-bootstrap';
-import {
-    connect
-} from 'react-redux';
-import {
-    getWeek,
-    getWeeks
-} from '../selectors/weeksSelector';
-import {
-    getTeams
-} from '../selectors/teamsSelector';
-import {
-    data as weekSelected
-} from '../selectors/weekSelectedSelector';
-import {
-    selectPreviousWeek,
-    selectNextWeek
-} from '../actions/weekSelectedAction';
+import { Button, Container, Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { getWeek, getWeeks } from '../selectors/weeksSelector';
+import { getTeams } from '../selectors/teamsSelector';
+import { data as weekSelected } from '../selectors/weekSelectedSelector';
+import { selectPreviousWeek, selectNextWeek } from '../actions/weekSelectedAction';
 import Result from '../components/Result';
 
 class WeekGames extends React.PureComponent {
@@ -60,7 +43,7 @@ class WeekGames extends React.PureComponent {
                 <Col className="text-center" style={{ alignSelf: 'center' }}>Week <strong>#{this.props.week}</strong></Col>
                 <Col className="text-right float-right">
                     { // Hide next button if already in last week
-                        this.props.week !== (this.props.weeks.length - 1) &&
+                        this.props.week !== this.props.weeks.length &&
                         <Button
                             variant="light"
                             onClick={this.onClickNavigateNext}
@@ -78,9 +61,9 @@ class WeekGames extends React.PureComponent {
 };
 
 const styles = {
-    container: { 
-        marginTop: 15, 
-        marginBottom: 15 
+    container: {
+        marginTop: 15,
+        marginBottom: 15
     }
 }
 
