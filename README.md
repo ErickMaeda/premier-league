@@ -75,13 +75,13 @@ npm start --reset-cache
 ### Premier League API
 
 - Base URL
--- http://acor.sl.pt:7777
+    - http://acor.sl.pt:7777
 - Available EndPoints
--- http://acor.sl.pt:7777/teams
---  http://acor.sl.pt:7777/teams/:teamId
--- http://acor.sl.pt:7777/logos/:teamId
--- http://acor.sl.pt:7777/weeks
--- http://acor.sl.pt:7777/weeks/:weekIdx
+    - http://acor.sl.pt:7777/teams
+    -  http://acor.sl.pt:7777/teams/:teamId
+    - http://acor.sl.pt:7777/logos/:teamId
+    - http://acor.sl.pt:7777/weeks
+    - http://acor.sl.pt:7777/weeks/:weekIdx
 > All the EndPoints are GET method.
 
 
@@ -91,12 +91,8 @@ npm start --reset-cache
 
 <https://en.wikipedia.org/wiki/Premier_League#Competition_format>
 
-* wins are awarded 3 points, draws 1 and losses 0
-
-* criteria for finding the Premier League ranking are:
-
-* total points
-
-* goal difference
-
-* goals scored
+- wins are awarded 3 points, draws 1 and losses 0
+- criteria for finding the Premier League ranking are:
+- total points
+- goal difference
+- goals scored
