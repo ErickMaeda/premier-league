@@ -32,12 +32,14 @@ class Result extends React.PureComponent {
         const homeTeam = getTeam(game.teamIds[0]) || {};
         const awayTeam = getTeam(game.teamIds[1]) || {};
         
-        let homeTeamName = (showFullName && !isMobile) ? homeTeam.name : homeTeam.shortName;
-        let awayTeamName = (showFullName && !isMobile) ? awayTeam.name : awayTeam.shortName;
+        const homeTeamName = (showFullName && !isMobile) ? homeTeam.name : homeTeam.shortName;
+        const awayTeamName = (showFullName && !isMobile) ? awayTeam.name : awayTeam.shortName;
         
-        let homeTeamBold = homeTeamGoals > awayTeamGoals;
-        let awayTeamBold = awayTeamGoals > homeTeamGoals;
+        const homeTeamBold = homeTeamGoals > awayTeamGoals;
+        const awayTeamBold = awayTeamGoals > homeTeamGoals;
 
+        const styleTextGoals = isMobile && styles.textMobile ? {...styles.textScoreBoard, ...styles.textMobile} : styles.textScoreBoard;
+        
         return (
             <Container key={index}>
                 <Row>
@@ -51,7 +53,7 @@ class Result extends React.PureComponent {
                             alt={`${homeTeam.name} Logo`}
                         />
                         &nbsp;
-                        <span style={[styles.textScoreBoard, isMobile && styles.textMobile]}>{homeTeamGoals} x {awayTeamGoals}</span>
+                        <span style={styleTextGoals}>{homeTeamGoals} x {awayTeamGoals}</span>
                         &nbsp;
                         <img 
                             style={styles.logo} 
@@ -65,6 +67,7 @@ class Result extends React.PureComponent {
                 </Row>
             </Container>
         );
+        return <div/>
     };
 };
 
@@ -85,7 +88,7 @@ const styles = {
         paddingRight: 4
     },
     textMobile: {
-        fontSize: 12
+        fontSize: 13
     }
 };
 
