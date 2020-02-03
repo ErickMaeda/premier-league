@@ -174,11 +174,10 @@ class Team extends Component {
                         <div style={styles.space} />
                         <h5>Contacts</h5>
                         <div style={styles.space} />
-                        <p><strong>Skype</strong>: erick_maeda26</p>
+                        <p><strong>Skype</strong>: erickmlopes</p>
                         <p><strong>Email</strong>: erick.maeda26@gmail.com</p>
                     </Col>
                 </Row>
-
             </Card>
         );
     }
