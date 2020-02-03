@@ -23,7 +23,7 @@ npm install
 npm start --reset-cache
 ```  
 ## Live Demo
-  [Premier League - React Challenge - Erick Maeda](http://www.erickmaeda.com.br/#/)
+  [Premier League - React Challenge - Erick Maeda](https://reacttestsky.erickmaeda.com.br)
 
 ## Screenshots
 [Images full screen](https://github.com/ErickMaeda/premier-league/tree/master/assets/screenshots)
