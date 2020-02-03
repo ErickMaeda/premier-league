@@ -1,0 +1,65 @@
+version: 2.0
+jobs:
+  build:
+    working_directory: ~/repository
+    docker:
+      - image: circleci/node:10.16.3
+    steps:
+      - checkout
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: test
+          command: npm run test-nowatch
+  deploy: # deploy script
+    working_directory: ~/repository
+    docker:
+      - image: circleci/node:10.16.3
+    steps:
+      - checkout
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run: # build react
+          name: react-build
+          command: npm run build
+      - run: # make  copy of .firebaserc
+          name: generate-firebaserc
+          command: cp .firebaserc.example .firebaserc
+      - run: # modify .firebaserc with env variable
+          name: modify-firebaserc
+          command: sed -i "s/\[YOUR\-PROJECT\-ID\]/$FIREBASE_PROJECT_ID/g" .firebaserc
+      - run:
+          name: Deploy Firebase
+          command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN" --only hosting
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build # perform this first
+      - deploy: # perform second
+          requires:
+            - build
+          filters: # only for the master branch
+            branches:
+              only: master
