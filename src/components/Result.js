@@ -67,7 +67,6 @@ class Result extends React.PureComponent {
                 </Row>
             </Container>
         );
-        return <div/>
     };
 };
 
