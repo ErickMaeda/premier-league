@@ -162,7 +162,7 @@ class Team extends Component {
                         <div style={styles.space} />
                         <h5>Useful Links</h5>
                         <div style={styles.space} />
-                        <p><a href="https://github.com/ErickMaeda/premier-league">GitHub - Repository (Please request the access to check it)</a></p>
+                        <p><a href="https://github.com/ErickMaeda/premier-league">GitHub - Repository</a></p>
                         <p><a href="https://www.linkedin.com/in/erickmaeda">LinkedIn</a></p>
                         <p><a href="http://www.erickmaeda.com.br">Challenge Demo</a></p>
                         <p><a href="https://www.sky.com/">Sky</a></p>
