@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    Container,
     Row,
     Col
 } from 'react-bootstrap';
@@ -11,10 +10,11 @@ import {
     getTeam
 } from '../selectors/teamsSelector';
 import withSizeDetectionHoc from '../hocs/withSizeDetectionHoc';
+import PlaceholderImage from '../assets/team-placeholder.png';
 
 class Result extends React.PureComponent {
 
-    render() {        
+    render() {
         const {
             game,
             showFullName,
@@ -27,45 +27,43 @@ class Result extends React.PureComponent {
         }
         const homeTeamGoals = game.score[0];
         const awayTeamGoals = game.score[1];
-        
-        
+
+
         const homeTeam = getTeam(game.teamIds[0]) || {};
         const awayTeam = getTeam(game.teamIds[1]) || {};
         
         const homeTeamName = (showFullName && !isMobile) ? homeTeam.name : homeTeam.shortName;
         const awayTeamName = (showFullName && !isMobile) ? awayTeam.name : awayTeam.shortName;
-        
+
         const homeTeamBold = homeTeamGoals > awayTeamGoals;
         const awayTeamBold = awayTeamGoals > homeTeamGoals;
 
-        const styleTextGoals = isMobile && styles.textMobile ? {...styles.textScoreBoard, ...styles.textMobile} : styles.textScoreBoard;
-        
+        const styleTextGoals = isMobile && styles.textMobile ? { ...styles.textScoreBoard, ...styles.textMobile } : styles.textScoreBoard;
+
         return (
-            <Container key={index}>
-                <Row>
-                    <Col xs={3} className="text-right">
-                        {homeTeamBold ? (<span style={styles.textWinner}>{homeTeamName}</span>) : homeTeamName}
-                    </Col>
-                    <Col xs={6} className="text-center">
-                        <img 
-                            style={styles.logo} 
-                            src={homeTeam.logo}
-                            alt={`${homeTeam.name} Logo`}
-                        />
-                        &nbsp;
+            <Row key={index}>
+                <Col xs={3} className="text-right">
+                    {homeTeamBold ? (<span style={styles.textWinner}>{homeTeamName}</span>) : homeTeamName}
+                </Col>
+                <Col xs={6} className="text-center">
+                    <img
+                        style={styles.logo}
+                        src={homeTeam.logo ? homeTeam.logo : PlaceholderImage}
+                        alt={`${homeTeam.name ? homeTeam.name : ' - '} Logo`}
+                    />
+                    &nbsp;
                         <span style={styleTextGoals}>{homeTeamGoals} x {awayTeamGoals}</span>
-                        &nbsp;
-                        <img 
-                            style={styles.logo} 
-                            src={awayTeam.logo}
-                            alt={`${awayTeam.name} Logo`}
-                        />
-                    </Col>
-                    <Col xs={3} className="text-left">
-                        {awayTeamBold ? (<span style={styles.textWinner}>{awayTeamName}</span>) : awayTeamName}
-                    </Col>
-                </Row>
-            </Container>
+                    &nbsp;
+                        <img
+                        style={styles.logo}
+                        src={awayTeam.logo ? awayTeam.logo : PlaceholderImage}
+                        alt={`${awayTeam.name ? awayTeam.name : ' - '} Logo`}
+                    />
+                </Col>
+                <Col xs={3} className="text-left">
+                    {awayTeamBold ? (<span style={styles.textWinner}>{awayTeamName}</span>) : awayTeamName}
+                </Col>
+            </Row>
         );
     };
 };
