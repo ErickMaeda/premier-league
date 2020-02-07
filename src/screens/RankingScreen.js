@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
-import { Container, Row, Col, Card, Spinner } from 'react-bootstrap';
+import React, { Component, useState } from 'react';
+import { Container, Row, Col, Card, Spinner, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { fetch as fetchTeams } from '../actions/teamsAction';
 import { fetch as fetchWeeks } from '../actions/weeksAction';
 import RankingTable from '../components/RankingTable';
 import WeekGames from '../components/WeekGames';
 import LegendBox from '../components/LegendBox';
+import Banner from '../components/Banner';
+import Loading from '../components/Loading';
 import withSizeDetectionHoc from '../hocs/withSizeDetectionHoc';
 import withHeaderHoc from '../hocs/withHeaderHoc';
 import { getRanking } from '../selectors/rankingSelector';
@@ -17,11 +19,30 @@ import { Chart } from "react-google-charts";
 
 class Ranking extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isLoading: false,
+            showBoxTryAgain: false
+        };
+    };
+
     componentDidMount() {
         this.refreshData();
-    }
+    };
 
-    refreshData = () => this.props.fetchTeams().then(this.props.fetchWeeks);
+    refreshData = () => {
+        this.setState({ isLoading: true, showBoxTryAgain: false }, () => {
+            this.props
+                .fetchTeams()
+                .then(this.props.fetchWeeks)
+                .then(() => this.setState({ isLoading: false }))
+                .catch(() => {
+                    this.setState({ isLoading: false, showBoxTryAgain: true });
+                });
+        });
+    };
 
     /**
      * Calculate and render the chart
@@ -81,11 +102,31 @@ class Ranking extends Component {
         );
     }
 
+    renderTryAgain = () => {
+        return (
+            <Banner
+                messageComponent={
+                    <span className="text-center">Something went wrong. Do you want to <Alert.Link onClick={this.refreshData}>try again?</Alert.Link></span>
+                }
+            />
+        );
+    };
+
+    renderLoading = () => {
+        return (
+            <Loading />
+        );
+    };
+
     render() {
 
         const {
             isMobile
         } = this.props;
+        const {
+            isLoading,
+            showBoxTryAgain
+        } = this.state;
 
         const rankingTableComponent = (
             <div>
@@ -98,17 +139,27 @@ class Ranking extends Component {
         if (isMobile) {
             return (
                 <Container style={styles.container}>
-                    <Col style={styles.colWithoutPadding}>
-                        {rankingTableComponent}
-                    </Col>
-                    <Col style={styles.colWithoutPadding}>
-                        {weekGamesComponent}
-                    </Col>
+                    <Row>
+                        {isLoading ? this.renderLoading() : null}
+                        {showBoxTryAgain ? this.renderTryAgain() : null}
+                    </Row>
+                    <Row>
+                        <Col style={styles.colWithoutPadding}>
+                            {rankingTableComponent}
+                        </Col>
+                        <Col style={styles.colWithoutPadding}>
+                            {weekGamesComponent}
+                        </Col>
+                    </Row>
                 </Container>
             );
         }
         return (
             <Container style={styles.container}>
+                <Row>
+                    {isLoading ? this.renderLoading() : null}
+                    {showBoxTryAgain ? this.renderTryAgain() : null}
+                </Row>
                 <Row style={styles.container}>
                     <Col md={12} lg={7}>
                         <Card>{rankingTableComponent}</Card>
@@ -147,7 +198,7 @@ const styles = {
     }
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
     return {
         ranking: getRanking(),
         weeks: getWeeks(),
