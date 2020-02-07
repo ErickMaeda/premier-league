@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { Container, Row, Col, Card, Spinner, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { fetch as fetchTeams } from '../actions/teamsAction';
