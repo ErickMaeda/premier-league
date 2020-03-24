@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = "http://acor.sl.pt:7777";
+const API = "https://us-central1-premier-league-sky-test.cloudfunctions.net";
 
 export default class Api {
 
@@ -40,6 +40,7 @@ export default class Api {
     request = (url = null) => new Promise((resolve, reject) => {
         const requestUrl = url || this.toString();
         axios.get(requestUrl)
+            .then((response) => response.data)
             .then((response) => resolve(response.data))
             .catch(reject);
     });
