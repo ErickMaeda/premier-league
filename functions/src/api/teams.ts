@@ -9,9 +9,12 @@ api.get(
     '/',
     async (request: any, response: any) => {
         try {
-            const teams = await firestore().collection("teams").get();
-            const teamsData = teams.docs.map((team: firestore.QueryDocumentSnapshot) => team.data().name);
-            return response.send(successResponse(teamsData));
+            const teamsFirestore = await firestore().collection("teams").get();
+            const teamsData = teamsFirestore.docs.map((team: firestore.QueryDocumentSnapshot) => team.data());
+            const teams = teamsData
+                .sort((a: any, b: any) => a['id'] - b['id'])
+                .map((team: any) => team.name);
+            return response.send(successResponse(teams));
         } catch (error) {
             return response.send(errorResponse(error.message));
         }
@@ -25,11 +28,7 @@ api.get(
             const { id } = request.params;
             console.log('Team ID -> ', id);
             const teams = await firestore().collection("teams").get();
-            const teamsData = teams.docs.filter((value: firestore.QueryDocumentSnapshot) => {
-                console.log('value.data().id', value.data().id);
-                console.log('id', id);
-                return parseInt(value.data().id) === parseInt(id)
-            });
+            const teamsData = teams.docs.filter((value: firestore.QueryDocumentSnapshot) => parseInt(value.data().id) === parseInt(id));
             console.log('Team data', teamsData);
             let team = undefined;
             if (teamsData.length > 0) {
