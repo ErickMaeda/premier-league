@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.4.2",
-    "axios": "^0.18.1",
+    "axios": "^0.21.2",
     "bootstrap": "^4.4.1",
     "firebase-tools": "^7.12.1",
     "react": "^16.8.2",
